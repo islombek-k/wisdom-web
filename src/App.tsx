@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-import { RegisterPage } from "./pages/Register/ui/RegisterPage";
-import { OtpPage } from "./pages/Register/ui/OtpPage";
+import { RegisterPage } from "./pages/Auth/ui/RegisterPage";
+import { OtpPage } from "./pages/Auth/ui/OtpPage";
 
 function App() {
   return (
