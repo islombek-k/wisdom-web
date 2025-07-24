@@ -1,0 +1,63 @@
+diff --git a/src/App.tsx b/src/App.tsx
+index f0944af..8d4376f 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -1,9 +1,11 @@
++import TestComponent from '@/components/TestComponent'
++
+ function App() {
+   return (
+     <div>
+-      <p className="text-red-500">red text</p>
++      <TestComponent />
+     </div>
+-  );
++  )
+ }
+ 
+-export default App;
++export default App
+diff --git a/tsconfig.app.json b/tsconfig.app.json
+index 227a6c6..a276ec9 100644
+--- a/tsconfig.app.json
++++ b/tsconfig.app.json
+@@ -21,7 +21,11 @@
+     "noUnusedParameters": true,
+     "erasableSyntaxOnly": true,
+     "noFallthroughCasesInSwitch": true,
+-    "noUncheckedSideEffectImports": true
++    "noUncheckedSideEffectImports": true,
++
++    "paths": {
++      "@/*": ["./src/*"]
++    }
+   },
+   "include": ["src"]
+ }
+diff --git a/tsconfig.json b/tsconfig.json
+index 063dd97..1ffef60 100644
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -1,9 +1,4 @@
+ {
+-  "compilerOptions": {
+-    "paths": {
+-      "@/*": ["./src/*"]
+-    }
+-  },
+   "files": [],
+   "references": [
+     { "path": "./tsconfig.app.json" },
+diff --git a/vite.config.ts b/vite.config.ts
+index 1c21e86..2680889 100644
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -7,7 +7,7 @@ export default defineConfig({
+   plugins: [react()],
+   resolve: {
+     alias: {
+-      "@": path.resolve(__dirname, "../src"),
++      "@": path.resolve(__dirname, "./src"),
+     },
+   },
+ });
