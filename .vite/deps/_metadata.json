@@ -2,7 +2,57 @@
   "hash": "62e4335f",
   "configHash": "ec53e5e5",
   "lockfileHash": "2580a5bc",
-  "browserHash": "f8ca548a",
-  "optimized": {},
-  "chunks": {}
+  "browserHash": "6c8501af",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "e1fc97a2",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "9add46cd",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "6486d71f",
+      "needsInterop": true
+    },
+    "react-router": {
+      "src": "../../node_modules/react-router/dist/development/index.mjs",
+      "file": "react-router.js",
+      "fileHash": "37356f31",
+      "needsInterop": false
+    },
+    "react-otp-input": {
+      "src": "../../node_modules/react-otp-input/lib/index.esm.js",
+      "file": "react-otp-input.js",
+      "fileHash": "8e7aae55",
+      "needsInterop": false
+    },
+    "react-hook-form": {
+      "src": "../../node_modules/react-hook-form/dist/index.esm.mjs",
+      "file": "react-hook-form.js",
+      "fileHash": "7222022f",
+      "needsInterop": false
+    },
+    "@react-input/mask": {
+      "src": "../../node_modules/@react-input/mask/module/index.js",
+      "file": "@react-input_mask.js",
+      "fileHash": "bbf9f3dd",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-QOVZGY7A": {
+      "file": "chunk-QOVZGY7A.js"
+    },
+    "chunk-5WQJO2FO": {
+      "file": "chunk-5WQJO2FO.js"
+    }
+  }
 }

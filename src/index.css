@@ -2,13 +2,21 @@
 
 @theme {
   --font-display: "Montserrat";
-
+  --base-black: #1a1b1c;
+  --color-primary-50: #f0f9ff;
+  --color-primary-200: #b9e6fe;
   --color-primary-600: #0086c9;
   --color-primary-500: #00a0e9;
-
+  --color-primary-700: #026aa2;
   --color-gray-100: #f2f4f7;
+  --color-gray-200: #eaecf0;
 }
 
 body {
   font-family: var(--font-display);
+  background-color: var(--color-gray-200);
+}
+
+button {
+  cursor: pointer;
 }
