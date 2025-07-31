@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import OtpInput from "react-otp-input";
-import { Button } from "../../../shared/ui";
-import Logo from "../../../shared/assets/images/Logo.png";
+import { Button } from "@/shared/ui";
+import Logo from "@/shared/assets/images/Logo.png";
 import { LoadingIcon } from "@/shared/assets/icons";
 import "./OtpPage.css";
-import UkFlag from "../../../shared/assets/images/uk-flag.png";
-import Knowledge from "../../../shared/assets/images/knowledge.png";
-import Education from "../../../shared/assets/images/education.png";
-import Astronomy from "../../../shared/assets/images/astronomy.png";
+import UkFlag from "@/shared/assets/images/uk-flag.png";
+import Knowledge from "@/shared/assets/images/knowledge.png";
+import Education from "@/shared/assets/images/education.png";
+import Astronomy from "@/shared/assets/images/astronomy.png";
 
 interface OtpPageProps {
   phoneNumber?: string;

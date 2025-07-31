@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { MailIcon } from "../../../shared/assets/icons";
-import { Button, Input } from "../../../shared/ui";
-import Logo from "../../../shared/assets/images/Logo.png";
-import UkFlag from "../../../shared/assets/images/uk-flag.png";
-import Knowledge from "../../../shared/assets/images/knowledge.png";
-import Education from "../../../shared/assets/images/education.png";
-import Astronomy from "../../../shared/assets/images/astronomy.png";
+import { MailIcon } from "@/shared/assets/icons";
+import { Button, Input } from "@/shared/ui";
+import Logo from "@/shared/assets/images/Logo.png";
+import UkFlag from "@/shared/assets/images/uk-flag.png";
+import Knowledge from "@/shared/assets/images/knowledge.png";
+import Education from "@/shared/assets/images/education.png";
+import Astronomy from "@/shared/assets/images/astronomy.png";
 import { useMask } from "@react-input/mask";
 import "./RegisterPage.css";
 
@@ -16,28 +16,27 @@ interface RegisterFormData {
   email?: string;
 }
 
-type AuthMode = 'phone' | 'email';
+type AuthMode = "phone" | "email";
 
 export const RegisterPage = () => {
-  const [authMode, setAuthMode] = useState<AuthMode>('phone');
-  
+  const [authMode, setAuthMode] = useState<AuthMode>("phone");
+
   const inputRef = useMask({
     mask: "(__) - ___-__-__",
     replacement: { _: /\d/ },
   });
 
   const {
-    register,
     handleSubmit,
     control,
     formState: { errors },
     reset,
   } = useForm<RegisterFormData>();
-  
+
   const navigate = useNavigate();
 
   const onSubmit = (data: RegisterFormData) => {
-    if (authMode === 'phone') {
+    if (authMode === "phone") {
       console.log("Phone:", data.phone);
     } else {
       console.log("Email:", data.email);
@@ -51,7 +50,7 @@ export const RegisterPage = () => {
   };
 
   const getValidationRules = () => {
-    if (authMode === 'phone') {
+    if (authMode === "phone") {
       return {
         required: "Phone number is required",
         pattern: {
@@ -73,7 +72,7 @@ export const RegisterPage = () => {
     <div className="register-page">
       {/* Noise texture overlay */}
       <div className="noise-overlay" />
-      
+
       {/* Glassmorphism blur backgrounds */}
       <div className="blur-shape blur-shape-top-left" />
       <div className="blur-shape blur-shape-bottom-right" />
@@ -89,13 +88,15 @@ export const RegisterPage = () => {
               Welcome to Wisdom Dictionary!
             </h1>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Please, enter your {authMode === 'phone' ? 'phone number' : 'email address'} or choose other options to continue wisdom dictionary.
+              Please, enter your{" "}
+              {authMode === "phone" ? "phone number" : "email address"} or
+              choose other options to continue wisdom dictionary.
             </p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="mb-6">
             <div className="mb-4">
-              {authMode === 'phone' ? (
+              {authMode === "phone" ? (
                 <div className="flex gap-3">
                   <div className="flex items-center bg-gray-100 px-6 py-5 rounded-full border border-gray-200">
                     <span className="text-gray-700 font-medium">+998</span>
@@ -152,10 +153,12 @@ export const RegisterPage = () => {
             <Button
               variant="icon"
               icon={<MailIcon />}
-              onClick={() => handleAuthModeChange(authMode === 'phone' ? 'email' : 'phone')}
+              onClick={() =>
+                handleAuthModeChange(authMode === "phone" ? "email" : "phone")
+              }
               className="transition-all duration-200 hover:bg-gray-50"
             >
-              Continue with {authMode === 'phone' ? 'Email' : 'Phone'}
+              Continue with {authMode === "phone" ? "Email" : "Phone"}
             </Button>
           </div>
 

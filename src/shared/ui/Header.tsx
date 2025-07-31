@@ -8,10 +8,15 @@ import {
   PlayStoreIcon,
   CrownIcon,
   CancelIcon,
-} from "../assets/icons";
+} from "@/shared/assets/icons";
+import { Modal } from "./Modal";
 
 export const Header = () => {
   const [activeTab, setActiveTab] = useState("Translate");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleBuyPro = () => {
+    setIsModalOpen(true);
+  };
 
   const navItems = [
     { name: "Dictionary", href: "#" },
@@ -43,15 +48,11 @@ export const Header = () => {
         </button>
       </div>
 
-      {/* Main header */}
-
       <div className="bg-white px-4 py-3 max-w-[1240px] mx-auto flex items-center justify-between rounded-xl mt-4">
-        {/* Logo */}
         <div className="flex items-center">
           <LogoIcon />
         </div>
 
-        {/* Navigation - Hidden on mobile */}
         <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (
             <button
@@ -66,15 +67,17 @@ export const Header = () => {
               {item.name}
             </button>
           ))}
-          <div className="flex items-center justify-center gap-2 text-primary-600 font-medium">
+          <button
+            onClick={handleBuyPro}
+            className="flex items-center justify-center gap-2 text-primary-600 font-medium"
+          >
             <CrownIcon />
             <span className="text-transparent font-extrabold bg-clip-text bg-[linear-gradient(92.04deg,#026AA2_-3.79%,#512CCB_49.4%,#AF1AB7_103.79%)]">
               Wisdom Pro
             </span>
-          </div>
+          </button>
         </nav>
 
-        {/* Right side actions */}
         <div className="flex items-center gap-4">
           <button className="p-2 hover:bg-gray-100 rounded-full">
             <SearchIcon />
@@ -88,6 +91,14 @@ export const Header = () => {
           </button>
         </div>
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Buy Wisdom Pro"
+        description="You have to buy Wisdom Pro version for creating more groups."
+        primaryBtnText="Buy Wisdom Pro"
+      />
     </div>
   );
 };

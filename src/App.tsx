@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import { RegisterPage } from "./pages/Auth/ui/RegisterPage";
-import { OtpPage } from "./pages/Auth/ui/OtpPage";
-import { TranslatePage } from "./pages/Translate/ui/TranslatePage";
+import { OtpPage } from "@/pages/Auth/ui/OtpPage";
+import { TranslatePage } from "@/pages/Translate/ui/TranslatePage";
+import { registerSW } from "virtual:pwa-register";
 
+registerSW({ immediate: true });
 function App() {
-  return (
+  return ( 
     <BrowserRouter>
       <Routes>
         <Route path="/register" element={<RegisterPage />} />

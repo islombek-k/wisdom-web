@@ -885,3 +885,221 @@ export const LoadingIcon = () => (
     />
   </svg>
 );
+
+export const FileIcon = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    width="24"
+    height="25"
+    viewBox="0 0 24 25"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M14.4998 19.8354H12.4998C9.67139 19.8354 8.25718 19.8354 7.3785 18.9567C6.49982 18.078 6.49982 16.6638 6.49982 13.8354V8.83545C6.49982 6.00702 6.49982 4.59281 7.3785 3.71413C8.25718 2.83545 9.67139 2.83545 12.4998 2.83545H13.843C14.6605 2.83545 15.0692 2.83545 15.4368 2.98769C15.8043 3.13993 16.0933 3.42896 16.6714 4.00702L19.3282 6.66388C19.9063 7.24193 20.1953 7.53097 20.3476 7.89851C20.4998 8.26605 20.4998 8.6748 20.4998 9.4923V13.8354C20.4998 16.6638 20.4998 18.078 19.6211 18.9567C18.7425 19.8354 17.3282 19.8354 14.4998 19.8354Z"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M14.9998 3.33545V4.33545C14.9998 6.22107 14.9998 7.16388 15.5856 7.74966C16.1714 8.33545 17.1142 8.33545 18.9998 8.33545H19.9998"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M6.49939 5.83545C4.84254 5.83545 3.49939 7.1786 3.49939 8.83545V16.8354C3.49939 19.6639 3.49939 21.0781 4.37807 21.9567C5.25675 22.8354 6.67096 22.8354 9.49939 22.8354H14.4998C16.1566 22.8354 17.4998 21.4922 17.4998 19.8354"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M10 11.8354H14M10 15.8354H17"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
+export const MicrophoneIcon = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    width="24"
+    height="25"
+    viewBox="0 0 24 25"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M17 7.16504V11.165C17 13.9264 14.7614 16.165 12 16.165C9.23858 16.165 7 13.9264 7 11.165V7.16504C7 4.40362 9.23858 2.16504 12 2.16504C14.7614 2.16504 17 4.40362 17 7.16504Z"
+      stroke="#475467"
+      stroke-width="1.5"
+    />
+    <path
+      d="M17 7.16504H14M17 11.165H14"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+    />
+    <path
+      d="M20 11.165C20 15.5833 16.4183 19.165 12 19.165M12 19.165C7.58172 19.165 4 15.5833 4 11.165M12 19.165V22.165M12 22.165H15M12 22.165H9"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+    />
+  </svg>
+);
+
+export const CancelBlackIcon = () => (
+  <svg
+    width="24"
+    height="25"
+    viewBox="0 0 24 25"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M18 6.83545L6.00081 18.8347M17.9992 18.8354L6 6.8363"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
+export const VolumeIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M14 14.9785V9.3515C14 6.2063 14 4.6337 13.0747 4.24234C12.1494 3.85097 11.0603 4.96297 8.88232 7.18696C7.75439 8.33869 7.11085 8.59373 5.50604 8.59373C4.10257 8.59373 3.40084 8.59373 2.89675 8.93766C1.85035 9.65159 2.00852 11.047 2.00852 12.165C2.00852 13.283 1.85035 14.6784 2.89675 15.3924C3.40084 15.7363 4.10257 15.7363 5.50604 15.7363C7.11085 15.7363 7.75439 15.9914 8.88232 17.1431C11.0603 19.3671 12.1494 20.4791 13.0747 20.0877C14 19.6963 14 18.1237 14 14.9785Z"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M17 9.16504C17.6254 9.98472 18 11.0284 18 12.165C18 13.3016 17.6254 14.3453 17 15.165"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M20 7.16504C21.2508 8.53117 22 10.2707 22 12.165C22 14.0593 21.2508 15.7989 20 17.165"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
+export const BookmarkIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M3 18.1458V12.8725C3 9.2392 3 7.42252 4.09835 6.29378C5.1967 5.16504 6.96447 5.16504 10.5 5.16504C14.0355 5.16504 15.8033 5.16504 16.9017 6.29378C18 7.42252 18 9.2392 18 12.8725V18.1458C18 20.4517 18 21.6046 17.2755 22.0173C15.8724 22.8164 13.2405 20.1502 11.9906 19.3474C11.2657 18.8818 10.9033 18.649 10.5 18.649C10.0967 18.649 9.73425 18.8818 9.00938 19.3474C7.7595 20.1502 5.12763 22.8164 3.72454 22.0173C3 21.6046 3 20.4517 3 18.1458Z"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M9 2.16504H11C15.714 2.16504 18.0711 2.16504 19.5355 3.62951C21 5.09397 21 7.45099 21 12.165V18.165"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
+export const CopyIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M9 15.165C9 12.3366 9 10.9224 9.87868 10.0437C10.7574 9.16504 12.1716 9.16504 15 9.16504H16C18.8284 9.16504 20.2426 9.16504 21.1213 10.0437C22 10.9224 22 12.3366 22 15.165V16.165C22 18.9934 22 20.4076 21.1213 21.2863C20.2426 22.165 18.8284 22.165 16 22.165H15C12.1716 22.165 10.7574 22.165 9.87868 21.2863C9 20.4076 9 18.9934 9 16.165V15.165Z"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M16.9999 9.16504C16.9975 6.20795 16.9528 4.67625 16.092 3.62747C15.9258 3.42493 15.7401 3.23922 15.5376 3.073C14.4312 2.16504 12.7875 2.16504 9.5 2.16504C6.21252 2.16504 4.56878 2.16504 3.46243 3.073C3.25989 3.23921 3.07418 3.42493 2.90796 3.62747C2 4.73382 2 6.37756 2 9.66504C2 12.9525 2 14.5962 2.90796 15.7026C3.07417 15.9051 3.25989 16.0908 3.46243 16.257C4.51121 17.1178 6.04291 17.1625 9 17.1649"
+      stroke="#475467"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
+export const PlusIcon = ({
+  width = 24,
+  height = 24,
+  viewBox = "0 0 24 24",
+  className,
+  stroke = "#475467",
+}: {
+  width?: number;
+  height?: number;
+  viewBox?: string;
+  className?: string;
+  stroke?: string;
+}) => (
+  <svg
+    width={width}
+    className={className}
+    height={height}
+    viewBox={viewBox}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M12 4V20M20 12H4"
+      stroke={stroke}
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
+export const TickIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M5 14.5C5 14.5 6.5 14.5 8.5 18C8.5 18 14.0588 8.83333 19 7"
+      stroke="#079455"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);

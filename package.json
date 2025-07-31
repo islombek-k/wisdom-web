@@ -18,6 +18,7 @@
     "react-hook-form": "^7.60.0",
     "react-otp-input": "^3.1.1",
     "react-router": "^7.7.0",
+    "react-toastify": "^11.0.5",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
@@ -33,6 +34,7 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
     "vite": "^7.0.4",
+    "vite-plugin-pwa": "^1.0.2",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }

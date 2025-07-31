@@ -3,7 +3,7 @@ import {
   CrownIcon,
   AppStorBlackIcon,
   PlayStoreBlackIcon,
-} from "../assets/icons";
+} from "@/shared/assets/icons";
 
 export const Footer = () => {
   const navItems = [
