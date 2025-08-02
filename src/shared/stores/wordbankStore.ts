@@ -9,11 +9,11 @@ interface translationItem {
 }
 
 interface WordbankStore {
-  translation: translationItem | null;
+  translation: translationItem;
   setTranslation: (translation: translationItem) => void;
 }
 
 export const useWordbankStore = create<WordbankStore>((set) => ({
-  translation: null,
+  translation: { word: "", star: 0, word_class: "", type: "", id: 0 },
   setTranslation: (translation) => set({ translation }),
 }));

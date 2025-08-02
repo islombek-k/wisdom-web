@@ -180,9 +180,13 @@ export const TranslatePage = () => {
         isBookmarkModalOpen={isBookmarkModalOpen}
         setIsBookmarkModalOpen={setIsBookmarkModalOpen}
         onPressNewModal={() => setIsnewGroupModalOpen(true)}
-        translation={
-          translation || { id: 0, word: "", star: 0, word_class: "", type: "" }
-        }
+        translation={{
+          id: translation?.id ?? 0,
+          word: translation?.word ?? "",
+          star: translation?.star ?? 0,
+          word_class: translation?.word_class ?? "",
+          type: translation?.type ?? "",
+        }}
       />
       <NewGroupModal
         isnewGroupModalOpen={isnewGroupModalOpen}
