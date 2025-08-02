@@ -18,15 +18,15 @@ interface bookmarkModalProps {
   };
 }
 
-const   BookmarkModal = ({
+const BookmarkModal = ({
   isBookmarkModalOpen,
   setIsBookmarkModalOpen,
   onPressNewModal,
   translation,
 }: bookmarkModalProps) => {
-  const [isSavedGroupIdIncluded, setIsSavedGroupIdIncluded] = useState<
-    number[]
-  >([]);
+  // const [isSavedGroupIdIncluded, setIsSavedGroupIdIncluded] = useState<
+  //   number[]
+  // >([]);
 
   const createWordbankMutation = useMutation({
     mutationFn: wordbankApi.create,
