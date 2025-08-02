@@ -1,6 +1,5 @@
-import { PlusIcon, TickIcon } from "@/shared/assets/icons";
+import { PlusIcon } from "@/shared/assets/icons";
 import { Modal } from "@/shared/ui";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { wordbankApi } from "@/features/wordbank/api/wordbankApi";
@@ -24,10 +23,6 @@ const BookmarkModal = ({
   onPressNewModal,
   translation,
 }: bookmarkModalProps) => {
-  // const [isSavedGroupIdIncluded, setIsSavedGroupIdIncluded] = useState<
-  //   number[]
-  // >([]);
-
   const createWordbankMutation = useMutation({
     mutationFn: wordbankApi.create,
     onSuccess: () => {
@@ -43,8 +38,6 @@ const BookmarkModal = ({
   console.log("wordBank", translation);
 
   const handleSaveVocabulary = (folderId: number) => {
-    // setIsSavedGroupIdIncluded([...isSavedGroupIdIncluded, folderId]);
-
     createWordbankMutation.mutate({
       folder_id: folderId,
       word_id: translation.id,
