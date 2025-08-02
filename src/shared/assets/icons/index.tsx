@@ -827,8 +827,9 @@ export const CancelIcon = () => (
   </svg>
 );
 
-export const LoadingIcon = () => (
+export const LoadingIcon = ({ className }: { className?: string }) => (
   <svg
+    className={className}
     width="24"
     height="25"
     viewBox="0 0 24 25"

@@ -2,39 +2,69 @@ import { PlusIcon, TickIcon } from "@/shared/assets/icons";
 import { Modal } from "@/shared/ui";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { wordbankApi } from "@/features/wordbank/api/wordbankApi";
 
 interface bookmarkModalProps {
   isBookmarkModalOpen: boolean;
   setIsBookmarkModalOpen: (value: boolean) => void;
   onPressNewModal: () => void;
+  translation: {
+    id: number;
+    word: string;
+    star: number;
+    word_class: string;
+    type: string;
+  };
 }
 
-const bookmarks = [
-  {
-    id: 1,
-    name: "All vocabularies",
-    wordCount: 10,
-  },
-  {
-    id: 2,
-    name: "Work",
-    wordCount: 5,
-  },
-  {
-    id: 3,
-    name: "Personal",
-    wordCount: 3,
-  },
-];
-
-const BookmarkModal = ({
+const   BookmarkModal = ({
   isBookmarkModalOpen,
   setIsBookmarkModalOpen,
   onPressNewModal,
+  translation,
 }: bookmarkModalProps) => {
   const [isSavedGroupIdIncluded, setIsSavedGroupIdIncluded] = useState<
     number[]
   >([]);
+
+  const createWordbankMutation = useMutation({
+    mutationFn: wordbankApi.create,
+    onSuccess: () => {
+      toast.success("Vocabulary saved");
+    },
+    onError: (error: any) => {
+      const message =
+        error.response?.data?.message || "Failed to save vocabulary";
+      toast.error(message);
+    },
+  });
+
+  console.log("wordBank", translation);
+
+  const handleSaveVocabulary = (folderId: number) => {
+    // setIsSavedGroupIdIncluded([...isSavedGroupIdIncluded, folderId]);
+
+    createWordbankMutation.mutate({
+      folder_id: folderId,
+      word_id: translation.id,
+      word_parent_id: translation.id,
+      word: translation.word,
+      translation: translation.word,
+      number: 1,
+      type: translation.type,
+      word_class: translation.word_class,
+    });
+  };
+
+  const { data: wordbankData } = useQuery({
+    queryKey: ["wordbank"],
+    queryFn: wordbankApi.getList,
+    enabled: isBookmarkModalOpen,
+  });
+
+  const bookmarks = wordbankData?.folders || [];
+  console.log(bookmarks);
   return (
     <Modal
       isOpen={isBookmarkModalOpen}
@@ -50,24 +80,17 @@ const BookmarkModal = ({
           >
             <div className="leading-5">
               <p className="font-semibold text-base-black">{bookmark.name}</p>
-              <span className="text-gray-600 text-xs">
-                {bookmark.wordCount} words
-              </span>
+              {/* <span className="text-gray-600 text-xs">{bookmark.id} words</span> */}
             </div>
             <button
-              onClick={() => {
-                setIsSavedGroupIdIncluded([
-                  ...isSavedGroupIdIncluded,
-                  bookmark.id,
-                ]);
-                toast.success("Vocabulary saved");
-              }}
+              onClick={() => handleSaveVocabulary(bookmark.id)}
+              disabled={createWordbankMutation.isPending}
             >
-              {isSavedGroupIdIncluded.includes(bookmark.id) ? (
+              {/* {isSavedGroupIdIncluded.includes(bookmark.id) ? (
                 <TickIcon />
-              ) : (
-                <PlusIcon />
-              )}
+              ) : ( */}
+              <PlusIcon />
+              {/* // )} */}
             </button>
           </div>
         ))}

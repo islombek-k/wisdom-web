@@ -4,12 +4,6 @@ export interface TranslateFormData {
   targetLang: string;
 }
 
-export interface TranslateState {
-  translatedText: string;
-  isTranslating: boolean;
-  error: string | null;
-}
-
 export interface ModalState {
   isModalOpen: boolean;
   isBookmarkModalOpen: boolean;

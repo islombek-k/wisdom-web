@@ -14,7 +14,7 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const baseClasses =
-    "cursor-pointer rounded-full font-medium transition-colors disabled:opacity-50";
+    "w-full cursor-pointer rounded-full font-medium transition-colors disabled:opacity-50";
 
   const variantClasses = {
     primary: "bg-primary-600 hover:opacity-90 text-white py-3 px-4",

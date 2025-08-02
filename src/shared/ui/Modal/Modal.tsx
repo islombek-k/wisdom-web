@@ -11,6 +11,7 @@ interface ModalProps {
   primaryBtnText?: string;
   isBtnAvailable?: boolean;
   isPrimaryBtnDisabled?: boolean;
+  onPrimaryBtnClick?: () => void;
 }
 
 export const Modal = ({
@@ -22,11 +23,12 @@ export const Modal = ({
   primaryBtnText = "Save",
   isBtnAvailable = true,
   isPrimaryBtnDisabled = false,
+  onPrimaryBtnClick,
 }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed overflow-hidden inset-0 z-50 flex items-center justify-center">
       <div
         className="absolute inset-0 bg-black opacity-50 backdrop-blur-sm  backdrop-animate-in"
         onClick={onClose}
@@ -55,14 +57,15 @@ export const Modal = ({
             <Button
               variant="icon"
               onClick={onClose}
-              className="rounded-xl w-auto"
+              className="rounded-xl !w-auto"
             >
               Cancel
             </Button>
             <Button
+              onClick={onPrimaryBtnClick}
               disabled={isPrimaryBtnDisabled}
               variant="primary"
-              className="rounded-xl w-auto"
+              className="rounded-xl !w-auto"
             >
               {primaryBtnText}
             </Button>

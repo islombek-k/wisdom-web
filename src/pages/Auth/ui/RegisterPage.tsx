@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
 import { MailIcon } from "@/shared/assets/icons";
 import { Button, Input } from "@/shared/ui";
 import Logo from "@/shared/assets/images/Logo.png";
@@ -9,14 +8,14 @@ import Knowledge from "@/shared/assets/images/knowledge.png";
 import Education from "@/shared/assets/images/education.png";
 import Astronomy from "@/shared/assets/images/astronomy.png";
 import { useMask } from "@react-input/mask";
+import { useLogin } from "@/features/auth/hooks/useAuth";
+import { type AuthFormData } from "@/features/auth/types";
 import "./RegisterPage.css";
 
-interface RegisterFormData {
-  phone?: string;
-  email?: string;
-}
-
 type AuthMode = "phone" | "email";
+
+const PHONE_REGEX = /^\(\d{2}\)\s-\s\d{3}-\d{2}-\d{2}$/;
+const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 export const RegisterPage = () => {
   const [authMode, setAuthMode] = useState<AuthMode>("phone");
@@ -31,17 +30,31 @@ export const RegisterPage = () => {
     control,
     formState: { errors },
     reset,
-  } = useForm<RegisterFormData>();
+    watch,
+  } = useForm<AuthFormData>({
+    mode: "onChange",
+    defaultValues: {
+      phone: "",
+      email: "",
+    },
+  });
+  const loginMutation = useLogin({
+    phoneNumber: `998${watch("phone")?.replace(/\D/g, "")}`,
+  });
 
-  const navigate = useNavigate();
+  const watchedValues = watch();
 
-  const onSubmit = (data: RegisterFormData) => {
-    if (authMode === "phone") {
-      console.log("Phone:", data.phone);
-    } else {
-      console.log("Email:", data.email);
+  const onSubmit = async (data: AuthFormData) => {
+    if (authMode === "phone" && data.phone) {
+      const phoneNumber = data.phone.replace(/\D/g, "");
+      const fullPhone = `998${phoneNumber}`;
+
+      loginMutation.mutate({
+        phone: parseInt(fullPhone, 10),
+      });
+    } else if (authMode === "email" && data.email) {
+      console.log("Email auth not implemented yet:", data.email);
     }
-    navigate("/otp");
   };
 
   const handleAuthModeChange = (mode: AuthMode) => {
@@ -54,7 +67,7 @@ export const RegisterPage = () => {
       return {
         required: "Phone number is required",
         pattern: {
-          value: /^\(\d{2}\)\s-\s\d{3}-\d{2}-\d{2}$/,
+          value: PHONE_REGEX,
           message: "Please enter valid phone format",
         },
       };
@@ -62,18 +75,20 @@ export const RegisterPage = () => {
     return {
       required: "Email is required",
       pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        value: EMAIL_REGEX,
         message: "Please enter a valid email address",
       },
     };
   };
 
+  const isFormValid =
+    authMode === "phone"
+      ? watchedValues.phone && PHONE_REGEX.test(watchedValues.phone)
+      : watchedValues.email && EMAIL_REGEX.test(watchedValues.email || "");
+
   return (
     <div className="register-page">
-      {/* Noise texture overlay */}
       <div className="noise-overlay" />
-
-      {/* Glassmorphism blur backgrounds */}
       <div className="blur-shape blur-shape-top-left" />
       <div className="blur-shape blur-shape-bottom-right" />
 
@@ -137,9 +152,10 @@ export const RegisterPage = () => {
             <Button
               type="submit"
               variant="primary"
-              className="bg-primary-600 hover:bg-primary-500 transition-all duration-200"
+              disabled={!isFormValid || loginMutation.isPending}
+              className="w-full bg-primary-600 hover:bg-primary-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Get a code
+              {loginMutation.isPending ? "Sending..." : "Get a code"}
             </Button>
           </form>
 
@@ -156,7 +172,7 @@ export const RegisterPage = () => {
               onClick={() =>
                 handleAuthModeChange(authMode === "phone" ? "email" : "phone")
               }
-              className="transition-all duration-200 hover:bg-gray-50"
+              className="w-full transition-all duration-200 hover:bg-gray-50"
             >
               Continue with {authMode === "phone" ? "Email" : "Phone"}
             </Button>
