@@ -9,7 +9,7 @@ import {
   CrownIcon,
   CancelIcon,
 } from "@/shared/assets/icons";
-import { Modal } from "./Modal";
+import { Modal } from "./modal";
 
 export const Header = () => {
   const [activeTab, setActiveTab] = useState("Translate");
