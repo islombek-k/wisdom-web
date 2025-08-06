@@ -6,7 +6,6 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: ReactNode;
 }
 
-
 export const Button = ({
   variant = "primary",
   children,
@@ -18,7 +17,7 @@ export const Button = ({
     "w-full cursor-pointer rounded-full font-medium transition-colors disabled:opacity-50";
 
   const variantClasses = {
-    primary: "bg-blue-500 hover:bg-blue-600 text-white py-3 px-4",
+    primary: "bg-primary-600 hover:opacity-90 text-white py-3 px-4",
     icon: "bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 py-3 px-4 flex items-center justify-center gap-2",
   };
 
