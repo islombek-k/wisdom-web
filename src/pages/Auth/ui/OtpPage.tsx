@@ -145,7 +145,7 @@ export const OtpPage = () => {
               className="mb-6 bg-primary-600 hover:bg-primary-500 transition-all duration-200 disabled:opacity-50"
             >
               {verifyMutation.isPending ? (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center gap-2">
                   <LoadingIcon className="animate-spin" />
                   Verifying...
                 </div>

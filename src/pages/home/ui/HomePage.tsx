@@ -21,6 +21,10 @@ import OrnamentBg from "@/shared/assets/images/BG_ornament.png";
 import WordOne from "@/shared/assets/images/word_one.png";
 import WordTwo from "@/shared/assets/images/word_two.png";
 import WordThree from "@/shared/assets/images/word_three.png";
+import { useWordbankStore } from "@/shared/stores/wordbankStore";
+import { useNavigate } from "react-router";
+import HeroSliderSection from "@/features/home/ui/HeroSliderSection";
+
 const cardData = [
   {
     type: "GRAMMAR",
@@ -68,8 +72,9 @@ const differenceInWords = [
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState("Dictionary");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("English");
-
+  const [selectedLanguage, setSelectedLanguage] = useState("Uzbek");
+  const { setSourceText } = useWordbankStore();
+  const navigate = useNavigate();
   const navItems = [
     "Dictionary",
     "AI Translate",
@@ -146,7 +151,7 @@ const HomePage = () => {
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="Search dictionary"
-                      className="flex-1 px-4 py-4 text-lg  rounded-l-xl w-[500px]"
+                      className="flex-1 outline-none px-4 py-4 text-lg  rounded-l-xl w-[500px]"
                     />
 
                     <div className="flex gap-2 py-2">
@@ -170,7 +175,7 @@ const HomePage = () => {
                             selectedLanguage === "Uzbek" ? "English" : "Uzbek"
                           )
                         }
-                        className={`px-6 py-4 text-sm font-semibold ${
+                        className={`px-6 py-4 text-sm font-semibold rounded-md ${
                           selectedLanguage === "Uzbek"
                             ? "bg-gray-200 text-gray-700"
                             : "bg-gray-50 text-gray-500 hover:bg-gray-100"
@@ -181,7 +186,15 @@ const HomePage = () => {
                     </div>
                   </div>
                 </div>
-                <button className="p-[21px] bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors">
+                <button
+                  onClick={() => {
+                    if (searchQuery.trim()) {
+                      setSourceText(searchQuery);
+                      navigate("/translate");
+                    }
+                  }}
+                  className="p-[21px] bg-primary-600 text-white rounded-xl hover:opacity-95 transition-colors"
+                >
                   <SearchIcon stroke="white" />
                 </button>
               </div>
@@ -200,19 +213,21 @@ const HomePage = () => {
           </div>
         </div>
       </main>
-      <div className="flex items-center px-25 gap-3 mt-8">
+      <HeroSliderSection />
+      {/* <div className="flex items-center px-25 gap-3 mt-8 w-full h-96">
         <div>
           <img
             src={WordDetail}
             alt="word detail"
+            className="max-w-2/3 w-full h-full"
             // style={{
             //   background:
             //     "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 76.16%)",
             // }}
           />
         </div>
-        <img src={Quote} alt="quote" />
-      </div>
+        <img src={Quote} alt="quote" className="max-w-1/3 w-full h-full" />
+      </div> */}
       <div className="px-25 mt-8">
         <div className="bg-white rounded-4xl relative">
           <div className="py-[59px] pl-[64px]">
@@ -243,9 +258,7 @@ const HomePage = () => {
       <div className="px-25 mt-8">
         <div className="bg-white rounded-4xl relative p-9">
           <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-2xl mb-4">
-              Download Wisdom dictionary app
-            </h2>
+            <h2 className="font-semibold text-2xl mb-4">Difference in words</h2>
             <a
               href="/"
               className="flex items-center gap-2 text-primary-700 text-sm font-semibold"
@@ -253,14 +266,14 @@ const HomePage = () => {
               Explore more <ArrowRightIcon stroke="#026aa2" />
             </a>
           </div>
-          <div className="flex gap-3">
+          <div className="flex justify-between gap-3 w-full">
             {cardData.map((card) => (
-              <div
-                key={card.id}
-                className="relative overflow-hidden rounded-2xl"
-              >
-                <img src={OrnamentBg} className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-300/20" />
+              <div key={card.id} className="relative w-full rounded-2xl">
+                <img
+                  src={OrnamentBg}
+                  className="object-cover no-repeat rounded-2xl"
+                />
+                <div className="rounded-2xl absolute inset-0 bg-gradient-to-b from-transparent to-gray-300/20" />
                 <div className="absolute top-6 left-6">
                   <span className="backdrop-blur-sm px-3 py-1 rounded-md text-sm font-semibold text-base-black">
                     {card.type}
@@ -310,7 +323,7 @@ const HomePage = () => {
       </div>
       <div className="px-25 mt-8">
         <div className="bg-white rounded-4xl relative p-9">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between w-full">
             <h2 className="font-semibold text-2xl mb-4">Difference in words</h2>
             <a
               href="/"
@@ -319,11 +332,11 @@ const HomePage = () => {
               Explore more <ArrowRightIcon stroke="#026aa2" />
             </a>
           </div>
-          <div className="flex gap-3 overflow-hidden">
+          <div className="flex gap-3 overflow-hidden w-full">
             {differenceInWords.map((word) => (
               <div
                 key={word.id}
-                className="relative rounded-2xl overflow-hidden shadow-lg"
+                className="relative w-full rounded-2xl overflow-hidden shadow-lg"
               >
                 <img
                   src={word.image}

@@ -37,7 +37,7 @@ const getSearchType = (sourceLang: string, targetLang: string): SearchType => {
 };
 
 export const TranslatePage = () => {
-  const [sourceText, setSourceText] = useState("");
+  // const [sourceText, setSourceText] = useState("");
   const [sourceLang, setSourceLang] = useState("Uzbek");
   const [targetLang, setTargetLang] = useState("English");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,7 +45,8 @@ export const TranslatePage = () => {
   const [isnewGroupModalOpen, setIsnewGroupModalOpen] = useState(false);
   const [isRecordModalOpen, setIsRecordModalOpen] = useState(false);
 
-  const { setTranslation, translation } = useWordbankStore();
+  const { setTranslation, translation, sourceText, setSourceText } =
+    useWordbankStore();
   const debouncedSourceLang = useDebounce(sourceText, 500);
   const searchMutation = useMutation({
     mutationFn: searchApi.search,

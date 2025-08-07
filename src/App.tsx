@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { BrowserRouter, Routes, Route } from "react-router";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
 import { RegisterPage } from "./pages/auth/ui/RegisterPage";
 import { OtpPage } from "@/pages/auth/ui/OtpPage";
