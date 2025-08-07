@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   AppStoreBadge,
   ArrowRightIcon,
+  ArrowUpLeftIcon,
   CrownWhiteIcon,
   DesktopIcon,
   LoginIcon,
@@ -11,8 +12,6 @@ import {
 } from "@/shared/assets/icons";
 import WhiteLogo from "@/shared/assets/images/white_logo_wisdom.png";
 import BgOrnament from "@/shared/assets/images/bg_big_ornament.png";
-import WordDetail from "@/shared/assets/images/Word.png";
-import Quote from "@/shared/assets/images/Toutube.png";
 import QR from "@/shared/assets/images/QR.png";
 import WisdomContainer from "@/shared/assets/images/bg_wisdom_container.png";
 import FlipCard from "@/shared/assets/images/flip_card.png";
@@ -24,6 +23,11 @@ import WordThree from "@/shared/assets/images/word_three.png";
 import { useWordbankStore } from "@/shared/stores/wordbankStore";
 import { useNavigate } from "react-router";
 import HeroSliderSection from "@/features/home/ui/HeroSliderSection";
+import { useMutation } from "@tanstack/react-query";
+import { searchApi } from "@/features/search/api/searchApi";
+import useDebounce from "@/shared/hooks/useDebounce";
+import { getSearchType } from "@/pages/translate/ui/TranslatePage";
+import type { SearchResultItem } from "@/features/search/types";
 
 const cardData = [
   {
@@ -70,11 +74,14 @@ const differenceInWords = [
 ];
 
 const HomePage = () => {
-  const [activeTab, setActiveTab] = useState("Dictionary");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("Uzbek");
-  const { setSourceText } = useWordbankStore();
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("Dictionary");
+  const [selectedLanguage, setSelectedLanguage] = useState("Uzbek");
+  const [searchResult, setSearchResult] = useState<SearchResultItem[]>([]);
+  const { sourceText, setSourceText } = useWordbankStore();
+  const debouncedSourceLang = useDebounce(sourceText, 500);
+  const dropdownRef = useRef(null);
+
   const navItems = [
     "Dictionary",
     "AI Translate",
@@ -86,6 +93,35 @@ const HomePage = () => {
     "News",
     "About Us",
   ];
+
+  const searchMutation = useMutation({
+    mutationFn: searchApi.search,
+    onSuccess: (response) => {
+      if (response.status && response.result.length > 0) {
+        const bestResult =
+          response.result
+            .filter((item) => item.star > 0)
+            .sort((a, b) => b.star - a.star)[0] || response.result[0];
+        console.log("bestResult", bestResult);
+        setSearchResult(response?.result);
+        // setTranslation(bestResult);
+      } else {
+        // setTranslation({
+        //   word: "No translation found",
+        // });
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (debouncedSourceLang.trim()) {
+      const searchType = getSearchType("Uzbek", "English");
+      searchMutation.mutate({
+        type: searchType,
+        search: debouncedSourceLang.trim(),
+      });
+    }
+  }, [debouncedSourceLang]);
 
   const searchTabs = ["Dictionary", "Grammar", "Collocations"];
 
@@ -148,8 +184,13 @@ const HomePage = () => {
                     <SearchIcon />
                     <input
                       type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
+                      value={sourceText}
+                      onChange={(e) => {
+                        setSourceText(e.target.value);
+                        if (e.target.value.trim() === "") {
+                          setSearchResult([]);
+                        }
+                      }}
                       placeholder="Search dictionary"
                       className="flex-1 outline-none px-4 py-4 text-lg  rounded-l-xl w-[500px]"
                     />
@@ -185,11 +226,32 @@ const HomePage = () => {
                       </button>
                     </div>
                   </div>
+                  {sourceText.trim() && searchResult.length > 0 && (
+                    <div
+                      ref={dropdownRef}
+                      className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-80 overflow-y-auto"
+                    >
+                      {searchResult.map((result, index) => (
+                        <button
+                          key={result.id}
+                          // onClick={() => handleSuggestionClick(suggestion)}
+                          className={`p-5 hover:bg-gray-100 border-b border-b-gray-200 w-full py-3 cursor-pointer transition-colors flex items-center justify-between  ${
+                            index === 0 ? "rounded-t-xl" : ""
+                          } `}
+                        >
+                          {/* <Search className="w-4 h-4 text-gray-400 mr-3" /> */}
+                          <span className=" text-gray-900">
+                            {result.word_class}
+                          </span>
+                          <ArrowUpLeftIcon />
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <button
                   onClick={() => {
-                    if (searchQuery.trim()) {
-                      setSourceText(searchQuery);
+                    if (sourceText.trim()) {
                       navigate("/translate");
                     }
                   }}
@@ -203,7 +265,9 @@ const HomePage = () => {
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`px-6 py-2 rounded-md text-sm font-medium transition-colors bg-primary-600 text-white`}
+                    className={`px-6 py-2 rounded-md text-sm font-medium transition-colors bg-primary-600 text-white ${
+                      activeTab === tab ? "border border-white" : ""
+                    }`}
                   >
                     {tab}
                   </button>

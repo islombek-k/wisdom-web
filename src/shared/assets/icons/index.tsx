@@ -1627,3 +1627,28 @@ export const ArrowRightIco = () => (
     />
   </svg>
 );
+
+export const ArrowUpLeftIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M10.8337 5L5.00041 5.0002L5 10.8333"
+      stroke="#1A1B1C"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M15.0001 15L5 5"
+      stroke="#141B34"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);

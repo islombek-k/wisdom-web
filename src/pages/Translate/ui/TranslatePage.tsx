@@ -21,7 +21,10 @@ import { type SearchType } from "@/features/search/types";
 import useDebounce from "@/shared/hooks/useDebounce";
 import { useWordbankStore } from "@/shared/stores/wordbankStore";
 
-const getSearchType = (sourceLang: string, targetLang: string): SearchType => {
+export const getSearchType = (
+  sourceLang: string,
+  targetLang: string
+): SearchType => {
   const source = sourceLang.toLowerCase();
   const target = targetLang.toLowerCase();
 
