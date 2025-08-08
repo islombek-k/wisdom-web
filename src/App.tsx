@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
-import { RegisterPage } from "./pages/auth/ui/RegisterPage";
-import { OtpPage } from "@/pages/auth/ui/OtpPage";
-import { TranslatePage } from "@/pages/translate/ui/TranslatePage";
+import { RegisterPage } from "./pages/auth_temp/ui/RegisterPage";
+import { OtpPage } from "@/pages/auth_temp/ui/OtpPage";
+import { TranslatePage } from "@/pages/translate_temp/ui/TranslatePage";
 import { registerSW } from "virtual:pwa-register";
-import HomePage from "./pages/home/ui/HomePage";
+import HomePage from "./pages/home_temp/ui/HomePage";
 
 registerSW({ immediate: true });
 function App() {
