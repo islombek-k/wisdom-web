@@ -9,7 +9,7 @@ import {
   CrownIcon,
   CancelIcon,
 } from "@/shared/assets/icons";
-import { Modal } from "./modal_temp";
+import { Modal } from "./modal";
 import { useNavigate } from "react-router";
 
 export const Header = () => {
