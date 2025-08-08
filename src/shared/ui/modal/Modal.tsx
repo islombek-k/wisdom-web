@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import { CancelBlackIcon } from "@/shared/assets/icons";
-import { Button } from "@/shared/ui/button_temp/Button";
+import { Button } from "@/shared/ui/button/Button";
 
 interface ModalProps {
   isOpen: boolean;

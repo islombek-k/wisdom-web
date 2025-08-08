@@ -26,7 +26,7 @@ import HeroSliderSection from "@/features/home/ui/HeroSliderSection";
 import { useMutation } from "@tanstack/react-query";
 import { searchApi } from "@/features/search/api/searchApi";
 import useDebounce from "@/shared/hooks/useDebounce";
-import { getSearchType } from "@/pages/translate_temp/ui/TranslatePage";
+import { getSearchType } from "@/pages/translate/ui/TranslatePage";
 import type { SearchResultItem } from "@/features/search/types";
 
 const cardData = [
