@@ -1,3 +1,3 @@
-export { Button } from "./button/Button";
-export { Input } from "./input/Input";
-export { Modal } from "./Modal";
+export { Button } from "./button_temp/Button";
+export { Input } from "./input_temp/Input";
+export { Modal } from "./modal_temp";
