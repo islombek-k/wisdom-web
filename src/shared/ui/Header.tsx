@@ -9,10 +9,12 @@ import {
   CrownIcon,
   CancelIcon,
 } from "@/shared/assets/icons";
-import { Modal } from "./modal";
+import { Modal } from "./Modal";
+import { useNavigate } from "react-router";
 
 export const Header = () => {
   const [activeTab, setActiveTab] = useState("Translate");
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleBuyPro = () => {
     setIsModalOpen(true);
@@ -49,9 +51,9 @@ export const Header = () => {
       </div>
 
       <div className="bg-white px-4 py-3 max-w-[1240px] mx-auto flex items-center justify-between rounded-xl mt-4">
-        <div className="flex items-center">
+        <button onClick={() => navigate("/")} className="flex items-center">
           <LogoIcon />
-        </div>
+        </button>
 
         <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (

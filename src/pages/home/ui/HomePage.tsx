@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   AppStoreBadge,
   ArrowRightIcon,
+  ArrowUpLeftIcon,
   CrownWhiteIcon,
   DesktopIcon,
   LoginIcon,
@@ -11,8 +12,6 @@ import {
 } from "@/shared/assets/icons";
 import WhiteLogo from "@/shared/assets/images/white_logo_wisdom.png";
 import BgOrnament from "@/shared/assets/images/bg_big_ornament.png";
-import WordDetail from "@/shared/assets/images/Word.png";
-import Quote from "@/shared/assets/images/Toutube.png";
 import QR from "@/shared/assets/images/QR.png";
 import WisdomContainer from "@/shared/assets/images/bg_wisdom_container.png";
 import FlipCard from "@/shared/assets/images/flip_card.png";
@@ -21,6 +20,15 @@ import OrnamentBg from "@/shared/assets/images/BG_ornament.png";
 import WordOne from "@/shared/assets/images/word_one.png";
 import WordTwo from "@/shared/assets/images/word_two.png";
 import WordThree from "@/shared/assets/images/word_three.png";
+import { useWordbankStore } from "@/shared/stores/wordbankStore";
+import { useNavigate } from "react-router";
+import HeroSliderSection from "@/features/home/ui/HeroSliderSection";
+import { useMutation } from "@tanstack/react-query";
+import { searchApi } from "@/features/search/api/searchApi";
+import useDebounce from "@/shared/hooks/useDebounce";
+import { getSearchType } from "@/pages/translate/ui/TranslatePage";
+import type { SearchResultItem } from "@/features/search/types";
+
 const cardData = [
   {
     type: "GRAMMAR",
@@ -66,9 +74,13 @@ const differenceInWords = [
 ];
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Dictionary");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("English");
+  const [selectedLanguage, setSelectedLanguage] = useState("Uzbek");
+  const [searchResult, setSearchResult] = useState<SearchResultItem[]>([]);
+  const { sourceText, setSourceText } = useWordbankStore();
+  const debouncedSourceLang = useDebounce(sourceText, 500);
+  const dropdownRef = useRef(null);
 
   const navItems = [
     "Dictionary",
@@ -81,6 +93,35 @@ const HomePage = () => {
     "News",
     "About Us",
   ];
+
+  const searchMutation = useMutation({
+    mutationFn: searchApi.search,
+    onSuccess: (response) => {
+      if (response.status && response.result.length > 0) {
+        const bestResult =
+          response.result
+            .filter((item) => item.star > 0)
+            .sort((a, b) => b.star - a.star)[0] || response.result[0];
+        console.log("bestResult", bestResult);
+        setSearchResult(response?.result);
+        // setTranslation(bestResult);
+      } else {
+        // setTranslation({
+        //   word: "No translation found",
+        // });
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (debouncedSourceLang.trim()) {
+      const searchType = getSearchType("Uzbek", "English");
+      searchMutation.mutate({
+        type: searchType,
+        search: debouncedSourceLang.trim(),
+      });
+    }
+  }, [debouncedSourceLang]);
 
   const searchTabs = ["Dictionary", "Grammar", "Collocations"];
 
@@ -143,10 +184,15 @@ const HomePage = () => {
                     <SearchIcon />
                     <input
                       type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
+                      value={sourceText}
+                      onChange={(e) => {
+                        setSourceText(e.target.value);
+                        if (e.target.value.trim() === "") {
+                          setSearchResult([]);
+                        }
+                      }}
                       placeholder="Search dictionary"
-                      className="flex-1 px-4 py-4 text-lg  rounded-l-xl w-[500px]"
+                      className="flex-1 outline-none px-4 py-4 text-lg  rounded-l-xl w-[500px]"
                     />
 
                     <div className="flex gap-2 py-2">
@@ -170,7 +216,7 @@ const HomePage = () => {
                             selectedLanguage === "Uzbek" ? "English" : "Uzbek"
                           )
                         }
-                        className={`px-6 py-4 text-sm font-semibold ${
+                        className={`px-6 py-4 text-sm font-semibold rounded-md ${
                           selectedLanguage === "Uzbek"
                             ? "bg-gray-200 text-gray-700"
                             : "bg-gray-50 text-gray-500 hover:bg-gray-100"
@@ -180,8 +226,37 @@ const HomePage = () => {
                       </button>
                     </div>
                   </div>
+                  {sourceText.trim() && searchResult.length > 0 && (
+                    <div
+                      ref={dropdownRef}
+                      className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-80 overflow-y-auto"
+                    >
+                      {searchResult.map((result, index) => (
+                        <button
+                          key={result.id}
+                          // onClick={() => handleSuggestionClick(suggestion)}
+                          className={`p-5 hover:bg-gray-100 border-b border-b-gray-200 w-full py-3 cursor-pointer transition-colors flex items-center justify-between  ${
+                            index === 0 ? "rounded-t-xl" : ""
+                          } `}
+                        >
+                          {/* <Search className="w-4 h-4 text-gray-400 mr-3" /> */}
+                          <span className=" text-gray-900">
+                            {result.word_class}
+                          </span>
+                          <ArrowUpLeftIcon />
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                <button className="p-[21px] bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors">
+                <button
+                  onClick={() => {
+                    if (sourceText.trim()) {
+                      navigate("/translate");
+                    }
+                  }}
+                  className="p-[21px] bg-primary-600 text-white rounded-xl hover:opacity-95 transition-colors"
+                >
                   <SearchIcon stroke="white" />
                 </button>
               </div>
@@ -190,7 +265,9 @@ const HomePage = () => {
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`px-6 py-2 rounded-md text-sm font-medium transition-colors bg-primary-600 text-white`}
+                    className={`px-6 py-2 rounded-md text-sm font-medium transition-colors bg-primary-600 text-white ${
+                      activeTab === tab ? "border border-white" : ""
+                    }`}
                   >
                     {tab}
                   </button>
@@ -200,19 +277,21 @@ const HomePage = () => {
           </div>
         </div>
       </main>
-      <div className="flex items-center px-25 gap-3 mt-8">
+      <HeroSliderSection />
+      {/* <div className="flex items-center px-25 gap-3 mt-8 w-full h-96">
         <div>
           <img
             src={WordDetail}
             alt="word detail"
+            className="max-w-2/3 w-full h-full"
             // style={{
             //   background:
             //     "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 76.16%)",
             // }}
           />
         </div>
-        <img src={Quote} alt="quote" />
-      </div>
+        <img src={Quote} alt="quote" className="max-w-1/3 w-full h-full" />
+      </div> */}
       <div className="px-25 mt-8">
         <div className="bg-white rounded-4xl relative">
           <div className="py-[59px] pl-[64px]">
@@ -243,9 +322,7 @@ const HomePage = () => {
       <div className="px-25 mt-8">
         <div className="bg-white rounded-4xl relative p-9">
           <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-2xl mb-4">
-              Download Wisdom dictionary app
-            </h2>
+            <h2 className="font-semibold text-2xl mb-4">Difference in words</h2>
             <a
               href="/"
               className="flex items-center gap-2 text-primary-700 text-sm font-semibold"
@@ -253,14 +330,14 @@ const HomePage = () => {
               Explore more <ArrowRightIcon stroke="#026aa2" />
             </a>
           </div>
-          <div className="flex gap-3">
+          <div className="flex justify-between gap-3 w-full">
             {cardData.map((card) => (
-              <div
-                key={card.id}
-                className="relative overflow-hidden rounded-2xl"
-              >
-                <img src={OrnamentBg} className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-300/20" />
+              <div key={card.id} className="relative w-full rounded-2xl">
+                <img
+                  src={OrnamentBg}
+                  className="object-cover no-repeat rounded-2xl"
+                />
+                <div className="rounded-2xl absolute inset-0 bg-gradient-to-b from-transparent to-gray-300/20" />
                 <div className="absolute top-6 left-6">
                   <span className="backdrop-blur-sm px-3 py-1 rounded-md text-sm font-semibold text-base-black">
                     {card.type}
@@ -310,7 +387,7 @@ const HomePage = () => {
       </div>
       <div className="px-25 mt-8">
         <div className="bg-white rounded-4xl relative p-9">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between w-full">
             <h2 className="font-semibold text-2xl mb-4">Difference in words</h2>
             <a
               href="/"
@@ -319,11 +396,11 @@ const HomePage = () => {
               Explore more <ArrowRightIcon stroke="#026aa2" />
             </a>
           </div>
-          <div className="flex gap-3 overflow-hidden">
+          <div className="flex gap-3 overflow-hidden w-full">
             {differenceInWords.map((word) => (
               <div
                 key={word.id}
-                className="relative rounded-2xl overflow-hidden shadow-lg"
+                className="relative w-full rounded-2xl overflow-hidden shadow-lg"
               >
                 <img
                   src={word.image}
