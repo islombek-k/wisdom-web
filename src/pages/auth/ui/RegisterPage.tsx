@@ -111,27 +111,29 @@ export const RegisterPage = () => {
 
           <form onSubmit={handleSubmit(onSubmit)} className="mb-6">
             <div className="mb-4">
-              {authMode === "phone" ? (
-                <div className="flex gap-3">
-                  <div className="flex items-center bg-gray-100 px-6 py-5 rounded-full border border-gray-200">
-                    <span className="text-gray-700 font-medium">+998</span>
-                  </div>
-                  <Controller
-                    name="phone"
-                    control={control}
-                    rules={getValidationRules()}
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        ref={inputRef}
-                        placeholder="( -- ) - --- -- --"
-                        className="flex-1 px-6 py-5 bg-gray-100"
-                        error={errors.phone?.message}
-                      />
-                    )}
-                  />
+              {/* {authMode === "phone" ? ( */}
+              <div className="flex gap-3">
+                <div className="flex items-center bg-gray-100 px-6 py-5 rounded-full border border-gray-200">
+                  <span className="text-gray-700 font-medium">+998</span>
                 </div>
-              ) : (
+                <Controller
+                  name="phone"
+                  control={control}
+                  rules={getValidationRules()}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      ref={inputRef}
+                      placeholder="( -- ) - --- -- --"
+                      className="flex-1 px-6 py-5 bg-gray-100"
+                    />
+                  )}
+                />
+              </div>
+              {/* <span className="text-red-500 text-sm mt-2">
+                {errors.phone?.message}
+              </span> */}
+              {/* ) : (
                 <Controller
                   name="email"
                   control={control}
@@ -147,6 +149,7 @@ export const RegisterPage = () => {
                   )}
                 />
               )}
+              <span>{errors.email?.message}</span> */}
             </div>
 
             <Button
