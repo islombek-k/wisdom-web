@@ -4,14 +4,14 @@ import HeroHeader from "@/shared/ui/HeroHeader";
 import KeyFeature1 from "@/shared/assets/images/key-feature-1.png";
 import KeyFeature2 from "@/shared/assets/images/key-feature-2.png";
 import KeyFeature3 from "@/shared/assets/images/key-feature-3.png";
-import AdBg from "@/shared/assets/images/ad-bg.png";
 import LearnMoreProCard from "@/shared/ui/LearnMoreProCard";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/shared/api/axios";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 // API Types
-interface GrammarWord {
+interface CollocationWord {
   id: number;
   worden: {
     id: number;
@@ -19,9 +19,9 @@ interface GrammarWord {
   };
 }
 
-interface GrammarApiResponse {
+interface CollocationApiResponse {
   current_page: number;
-  data: GrammarWord[];
+  data: CollocationWord[];
   first_page_url: string;
   from: number;
   last_page: number;
@@ -40,12 +40,12 @@ interface GrammarApiResponse {
 }
 
 // API function
-const fetchGrammarData = async (
+const fetchCollocationData = async (
   page: number = 1
-): Promise<GrammarApiResponse> => {
+): Promise<CollocationApiResponse> => {
   // Try multiple parameter names for pagination
   const response = await apiClient.get(
-    `/api/catalogue/grammar?page=${page}&page_size=10&limit=10&per_page=10`
+    `/api/catalogue/collocations?page=${page}&page_size=10&limit=10&per_page=10`
   );
   return response.data;
 };
@@ -99,16 +99,17 @@ const alphabetLetters = [
   "z",
 ];
 
-const GrammarAndCollocation = () => {
+const Collocation = () => {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
 
   const {
-    data: grammarData,
+    data: collocationData,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["grammar", currentPage],
-    queryFn: () => fetchGrammarData(currentPage),
+    queryKey: ["collocation", currentPage],
+    queryFn: () => fetchCollocationData(currentPage),
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
 
@@ -117,13 +118,13 @@ const GrammarAndCollocation = () => {
   };
 
   const handleNext = () => {
-    if (grammarData?.next_page_url) {
+    if (collocationData?.next_page_url) {
       setCurrentPage(currentPage + 1);
     }
   };
 
   const handlePrevious = () => {
-    if (grammarData?.prev_page_url) {
+    if (collocationData?.prev_page_url) {
       setCurrentPage(currentPage - 1);
     }
   };
@@ -137,14 +138,14 @@ const GrammarAndCollocation = () => {
             href="/"
             className="text-sm font-medium text-breadcrumb-label-secondary hover:backdrop-opacity-90"
           >
-            Home
+            {t("common.home")}
           </a>
           <ChevronRight />
           <a
-            href="/grammar"
+            href="/collocation"
             className="text-sm text-breadcrumb-label hover:backdrop-opacity-90"
           >
-            Grammar
+            {t("common.collocation")}
           </a>
         </div>
       </div>
@@ -155,11 +156,10 @@ const GrammarAndCollocation = () => {
               <div className="bg-white rounded-2xl p-8">
                 <div className="mb-8">
                   <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-                    Explore the English Grammar
+                    {t("collocation.exploreCollocations")}
                   </h1>
                   <p className="text-gray-500 text-lg leading-relaxed">
-                    Get clear grammar explanations with hundreds of examples of
-                    how grammar is used in natural written and spoken English.
+                    {t("collocation.description")}
                   </p>
                 </div>
 
@@ -169,14 +169,14 @@ const GrammarAndCollocation = () => {
                   </div>
                 ) : error ? (
                   <div className="text-center py-8 text-red-600">
-                    Error loading grammar data. Please try again.
+                    {t("collocation.errorLoading")}
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    {grammarData?.data.map((item) => (
+                    {collocationData?.data.map((item) => (
                       <a
                         key={item.id}
-                        href={`/grammar/${item.id}`}
+                        href={`/collocation/${item.id}`}
                         className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-xl transition-colors group"
                       >
                         <span className="text-gray-900 font-medium">
@@ -188,60 +188,46 @@ const GrammarAndCollocation = () => {
                   </div>
                 )}
 
-                {grammarData && (
+                {collocationData && (
                   <div className="flex items-center justify-center mt-8">
                     <div className="flex items-center">
                       <button
                         onClick={handlePrevious}
-                        disabled={!grammarData.prev_page_url}
+                        disabled={!collocationData.prev_page_url}
                         className={`p-2 transition-colors rotate-180 ${
-                          grammarData.prev_page_url
+                          collocationData.prev_page_url
                             ? "text-gray-600 hover:text-gray-800 cursor-pointer"
                             : "text-gray-300 cursor-not-allowed"
                         }`}
                       >
                         <ChevronRight />
                       </button>
-                      <span className="text-sm text-gray-500 mr-2">
-                        Previous
-                      </span>
-                    </div>
-
-                    <div className="flex items-center space-x-2">
-                      {grammarData.links
-                        .filter(
-                          (link) =>
-                            link.label !== "&laquo; Previous" &&
-                            link.label !== "Next &raquo;" &&
-                            link.label !== "..."
-                        )
-                        .map((link, index) => (
-                          <button
-                            key={index}
-                            onClick={() =>
-                              link.url && handlePageChange(parseInt(link.label))
-                            }
-                            disabled={!link.url}
-                            className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
-                              link.active
-                                ? "bg-primary-600 text-white"
-                                : link.url
-                                ? "text-gray-600 hover:bg-gray-100 cursor-pointer"
-                                : "text-gray-300 cursor-not-allowed"
-                            }`}
-                          >
-                            {link.label}
-                          </button>
-                        ))}
-                    </div>
-
-                    <div className="flex items-center">
-                      <span className="text-sm text-gray-500 ml-2">Next</span>
+                      <div className="flex items-center mx-4">
+                        {Array.from(
+                          { length: Math.min(5, collocationData.last_page) },
+                          (_, i) => {
+                            const page = i + 1;
+                            return (
+                              <button
+                                key={page}
+                                onClick={() => handlePageChange(page)}
+                                className={`px-3 py-1 mx-1 rounded transition-colors ${
+                                  currentPage === page
+                                    ? "bg-primary-600 text-white"
+                                    : "text-gray-600 hover:bg-gray-100"
+                                }`}
+                              >
+                                {page}
+                              </button>
+                            );
+                          }
+                        )}
+                      </div>
                       <button
                         onClick={handleNext}
-                        disabled={!grammarData.next_page_url}
+                        disabled={!collocationData.next_page_url}
                         className={`p-2 transition-colors ${
-                          grammarData.next_page_url
+                          collocationData.next_page_url
                             ? "text-gray-600 hover:text-gray-800 cursor-pointer"
                             : "text-gray-300 cursor-not-allowed"
                         }`}
@@ -255,14 +241,8 @@ const GrammarAndCollocation = () => {
 
               <div className="bg-white rounded-2xl p-8 mt-8">
                 <h2 className="text-2xl font-semibold text-black mb-4">
-                  Key features
+                  {t("common.keyFeatures")}
                 </h2>
-                <p className="text-gray-500 mb-8 leading-relaxed">
-                  Adapted from English Grammar Today, the English Grammar
-                  provides authentic examples of the way in which grammar is
-                  used in real-life situations, including standard and non-
-                  standard varieties of English.
-                </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {keyFeatures?.map((feature) => (
@@ -277,7 +257,7 @@ const GrammarAndCollocation = () => {
               </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-8">
               <div className="bg-white rounded-2xl p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-6">
                   Browse the English Grammar
@@ -296,12 +276,6 @@ const GrammarAndCollocation = () => {
               </div>
 
               <LearnMoreProCard />
-              <div className="relative">
-                <img src={AdBg} alt="ad" />
-                <div className="absolute top-4 left-4 text-sm bg-white/70 hover:bg-white/90  px-4 py-2 rounded-3xl font-medium transition-colors">
-                  Advertise
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -311,4 +285,4 @@ const GrammarAndCollocation = () => {
   );
 };
 
-export default GrammarAndCollocation;
+export default Collocation;

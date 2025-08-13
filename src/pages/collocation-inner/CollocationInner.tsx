@@ -5,28 +5,28 @@ import KeyFeature1 from "@/shared/assets/images/key-feature-1.png";
 import KeyFeature2 from "@/shared/assets/images/key-feature-2.png";
 import KeyFeature3 from "@/shared/assets/images/key-feature-3.png";
 import AdBg from "@/shared/assets/images/ad-bg.png";
-import WordExplanationCard from "@/features/grammar-and-collocation/WordExplanationCard";
+import WordExplanationCard from "@/features/grammar/WordExplanationCard";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/shared/api/axios";
 import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
 // API Types
-interface Grammar {
+interface Collocation {
   id: number;
   body: string;
 }
 
-interface GrammarDetailResponse {
+interface CollocationDetailResponse {
   word: string;
-  grammars: Grammar[];
+  collocations: Collocation[];
 }
 
 // API function
-const fetchGrammarDetail = async (
+const fetchCollocationDetail = async (
   id: string
-): Promise<GrammarDetailResponse> => {
-  const response = await apiClient.get(`/api/catalogue/grammar/view/${id}`);
+): Promise<CollocationDetailResponse> => {
+  const response = await apiClient.get(`/api/catalogue/collocation/view/${id}`);
   return response.data;
 };
 
@@ -79,40 +79,42 @@ const alphabetLetters = [
   "z",
 ];
 
-const GrammarAndCollocationInner = () => {
-  const { id } = useParams<{ id: string }>();
+const CollocationInner = () => {
   const { t } = useTranslation();
+  const { id } = useParams<{ id: string }>();
 
   const {
-    data: grammarDetail,
+    data: collocationData,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["grammarDetail", id],
-    queryFn: () => fetchGrammarDetail(id!),
+    queryKey: ["collocation-detail", id],
+    queryFn: () => fetchCollocationDetail(id!),
     enabled: !!id,
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
+
   if (isLoading) {
     return (
       <div>
         <HeroHeader />
-        <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-lg text-gray-600">{t('common.loading')}</div>
+        <div className="flex justify-center items-center min-h-screen">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+          <span className="ml-2">{t("common.loading")}</span>
         </div>
-        <Footer />
       </div>
     );
   }
 
-  if (error || !grammarDetail) {
+  if (error) {
     return (
       <div>
         <HeroHeader />
-        <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-lg text-red-600">{t('grammar.errorLoading')}</div>
+        <div className="flex justify-center items-center min-h-screen">
+          <div className="text-center py-8 text-red-600">
+            {t("collocation.errorLoading")}
+          </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -126,21 +128,14 @@ const GrammarAndCollocationInner = () => {
             href="/"
             className="text-sm font-medium text-breadcrumb-label-secondary hover:backdrop-opacity-90"
           >
-            {t('common.home')}
+            {t("common.home")}
           </a>
           <ChevronRight />
           <a
-            href="/grammar"
-            className="text-sm font-medium text-breadcrumb-label-secondary hover:backdrop-opacity-90"
-          >
-            {t('common.grammar')}
-          </a>
-          <ChevronRight />
-          <a
-            href="/grammar"
+            href="/collocation"
             className="text-sm text-breadcrumb-label hover:backdrop-opacity-90"
           >
-            {grammarDetail.word}
+            {t("common.collocation")}
           </a>
         </div>
       </div>
@@ -148,13 +143,35 @@ const GrammarAndCollocationInner = () => {
         <div className="max-w-[1240px] mx-auto mt-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <WordExplanationCard grammarData={grammarDetail} />
+              <div className="bg-white rounded-2xl p-8">
+                <div className="mb-8">
+                  <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+                    {collocationData?.word ||
+                      t("collocation.collocationDetails")}
+                  </h1>
+                  <p className="text-gray-500 text-lg leading-relaxed">
+                    {t("collocation.detailDescription")}
+                  </p>
+                </div>
+
+                {collocationData && (
+                  <WordExplanationCard
+                    grammarData={{
+                      word: collocationData.word,
+                      grammars: collocationData.collocations.map((col) => ({
+                        id: col.id,
+                        body: col.body,
+                      })),
+                    }}
+                  />
+                )}
+              </div>
             </div>
 
             <div className="space-y-6">
               <div className="bg-white rounded-2xl p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-6">
-                  {t('grammar.browseGrammar')}
+                  {t("grammar.browseGrammar")}
                 </h3>
 
                 <div className="grid grid-cols-7 gap-3 mb-6">
@@ -197,4 +214,4 @@ const GrammarAndCollocationInner = () => {
   );
 };
 
-export default GrammarAndCollocationInner;
+export default CollocationInner;

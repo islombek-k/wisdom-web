@@ -2,6 +2,7 @@
   "common": {
     "home": "Bosh sahifa",
     "grammar": "Grammatika",
+    "collocation": "Kollokatsiya",
     "search": "Qidirish",
     "translate": "Tarjima",
     "wordbank": "So'zlar banki",
@@ -21,12 +22,14 @@
     "logout": "Chiqish",
     "profile": "Profil",
     "settings": "Sozlamalar",
-    "language": "Til"
+    "language": "Til",
+    "keyFeatures": "Asosiy xususiyatlar"
   },
   "navigation": {
     "home": "Bosh sahifa",
     "grammar": "Grammatika va birikmalar",
     "translate": "Tarjima",
+    "collocation": "Kollokatsiya",
     "wordbank": "So'zlar banki",
     "news": "Yangiliklar",
     "wisdomPro": "Wisdom Pro",
@@ -40,6 +43,14 @@
     "synonyms": "Sinonimlar",
     "antonyms": "Antonimlar",
     "errorLoading": "Grammatika ma'lumotlarini yuklashda xatolik"
+  },
+  "collocation": {
+    "exploreCollocations": "Ingliz tili kollokatsiyalarini o'rganing",
+    "description": "Tabiiy so'z birikmalarini kashf eting va keng qamrovli kollokatsiya misollari bilan ingliz tilidagi ravonligingizni yaxshilang.",
+    "browseCollocations": "Ingliz tili kollokatsiyalarini ko'ring",
+    "errorLoading": "Kollokatsiya ma'lumotlarini yuklashda xatolik",
+    "collocationDetails": "Kollokatsiya tafsilotlari",
+    "detailDescription": "So'zlar ingliz tilida qanday tabiiy birlashishini o'rganing."
   },
   "search": {
     "placeholder": "So'zlar, iboralar yoki tarjimalarni qidirish...",

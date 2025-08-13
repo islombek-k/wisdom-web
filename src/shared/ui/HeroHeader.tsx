@@ -12,6 +12,7 @@ const HeroHeader = () => {
     { name: t('navigation.home'), path: "/" },
     { name: t('navigation.translate'), path: "/translate" },
     { name: t('navigation.grammar'), path: "/grammar" },
+    { name: t('navigation.collocation'), path: "/collocation" },
     { name: t('navigation.wordbank'), path: "/wordbank" },
     { name: t('navigation.news'), path: "/news" },
     { name: t('navigation.aboutUs'), path: "/about-us" },

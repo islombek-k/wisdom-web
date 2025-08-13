@@ -2,6 +2,7 @@
   "common": {
     "home": "Home",
     "grammar": "Grammar",
+    "collocation": "Collocation",
     "search": "Search",
     "translate": "Translate",
     "wordbank": "Wordbank",
@@ -21,25 +22,35 @@
     "logout": "Logout",
     "profile": "Profile",
     "settings": "Settings",
-    "language": "Language"
+    "language": "Language",
+    "keyFeatures": "Key Features"
   },
   "navigation": {
     "home": "Home",
-    "grammar": "Grammar & Collocation",
+    "grammar": "Grammar",
     "translate": "Translate",
+    "collocation": "Collocation",
     "wordbank": "Wordbank",
     "news": "News",
     "wisdomPro": "Wisdom Pro",
     "aboutUs": "About Us"
   },
   "grammar": {
-    "title": "Grammar & Collocation",
+    "title": "Grammar",
     "browseGrammar": "Browse the English Grammar",
     "searchPlaceholder": "Search for grammar rules...",
     "examples": "Examples",
     "synonyms": "Synonyms",
     "antonyms": "Antonyms",
     "errorLoading": "Error loading grammar data"
+  },
+  "collocation": {
+    "exploreCollocations": "Explore English Collocations",
+    "description": "Discover natural word combinations and improve your English fluency with comprehensive collocation examples.",
+    "browseCollocations": "Browse the English Collocations",
+    "errorLoading": "Error loading collocation data",
+    "collocationDetails": "Collocation Details",
+    "detailDescription": "Learn how words naturally combine together in English."
   },
   "search": {
     "placeholder": "Search for words, phrases, or translations...",

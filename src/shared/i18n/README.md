@@ -13,15 +13,15 @@ This project uses `react-i18next` for internationalization support.
 ### Basic Translation
 
 ```tsx
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 function MyComponent() {
   const { t } = useTranslation();
-  
+
   return (
     <div>
-      <h1>{t('common.home')}</h1>
-      <p>{t('grammar.title')}</p>
+      <h1>{t("common.home")}</h1>
+      <p>{t("grammar.title")}</p>
     </div>
   );
 }
@@ -32,7 +32,7 @@ function MyComponent() {
 Use the `LanguageSwitcher` component:
 
 ```tsx
-import LanguageSwitcher from '@/shared/ui/LanguageSwitcher';
+import LanguageSwitcher from "@/shared/ui/LanguageSwitcher";
 
 function Header() {
   return (
@@ -48,17 +48,17 @@ function Header() {
 Use the custom hook for additional functionality:
 
 ```tsx
-import { useTranslation } from '@/shared/hooks/useTranslation';
+import { useTranslation } from "@/shared/hooks/useTranslation";
 
 function MyComponent() {
   const { t, currentLanguage, changeLanguage, isLoading } = useTranslation();
-  
+
   if (isLoading) return <div>Loading translations...</div>;
-  
+
   return (
     <div>
       <p>Current language: {currentLanguage}</p>
-      <button onClick={() => changeLanguage('ru')}>Switch to Russian</button>
+      <button onClick={() => changeLanguage("ru")}>Switch to Russian</button>
     </div>
   );
 }
@@ -75,10 +75,10 @@ function MyComponent() {
   },
   "navigation": {
     "home": "Home",
-    "grammar": "Grammar & Collocation"
+    "grammar": "Grammar"
   },
   "grammar": {
-    "title": "Grammar & Collocation",
+    "title": "Grammar",
     "browseGrammar": "Browse the English Grammar"
   }
 }
@@ -87,6 +87,7 @@ function MyComponent() {
 ## Adding New Translations
 
 1. Add the key-value pair to all language files:
+
    - `src/shared/i18n/locales/en.json`
    - `src/shared/i18n/locales/ru.json`
    - `src/shared/i18n/locales/uz.json`
@@ -94,7 +95,7 @@ function MyComponent() {
 2. Use the translation in your component:
    ```tsx
    const { t } = useTranslation();
-   return <span>{t('your.new.key')}</span>;
+   return <span>{t("your.new.key")}</span>;
    ```
 
 ## Language Persistence
