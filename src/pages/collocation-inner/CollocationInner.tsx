@@ -1,9 +1,6 @@
 import { ChevronRight } from "@/shared/assets/icons";
 import { Footer } from "@/shared/ui/Footer";
 import HeroHeader from "@/shared/ui/HeroHeader";
-import KeyFeature1 from "@/shared/assets/images/key-feature-1.png";
-import KeyFeature2 from "@/shared/assets/images/key-feature-2.png";
-import KeyFeature3 from "@/shared/assets/images/key-feature-3.png";
 import AdBg from "@/shared/assets/images/ad-bg.png";
 import WordExplanationCard from "@/features/grammar/WordExplanationCard";
 import { useQuery } from "@tanstack/react-query";
@@ -22,33 +19,12 @@ interface CollocationDetailResponse {
   collocations: Collocation[];
 }
 
-// API function
 const fetchCollocationDetail = async (
   id: string
 ): Promise<CollocationDetailResponse> => {
   const response = await apiClient.get(`/api/catalogue/collocation/view/${id}`);
   return response.data;
 };
-
-const keyFeatures = [
-  {
-    id: 1,
-    icon: KeyFeature1,
-    description:
-      "Useful information on spelling, punctuation and word formation",
-  },
-  {
-    id: 2,
-    icon: KeyFeature2,
-    description: "Important advice on how to use English in conversation",
-  },
-  {
-    id: 3,
-    icon: KeyFeature3,
-    description:
-      "Useful information on spelling, punctuation and word formation",
-  },
-];
 
 const alphabetLetters = [
   "a",
@@ -137,23 +113,20 @@ const CollocationInner = () => {
           >
             {t("common.collocation")}
           </a>
+          <ChevronRight />
+          <a
+            href={`/collocation/${id}`}
+            className="text-sm text-breadcrumb-label hover:backdrop-opacity-90"
+          >
+            {collocationData?.word || t("collocation.collocationDetails")}
+          </a>
         </div>
       </div>
       <div className="mx-auto px-25 py-4">
         <div className="max-w-[1240px] mx-auto mt-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-2xl p-8">
-                <div className="mb-8">
-                  <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-                    {collocationData?.word ||
-                      t("collocation.collocationDetails")}
-                  </h1>
-                  <p className="text-gray-500 text-lg leading-relaxed">
-                    {t("collocation.detailDescription")}
-                  </p>
-                </div>
-
+              <div className="bg-white rounded-2xl">
                 {collocationData && (
                   <WordExplanationCard
                     grammarData={{
