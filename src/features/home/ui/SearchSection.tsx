@@ -2,31 +2,53 @@ import { SearchIcon } from "@/shared/assets/icons";
 import { useWordbankStore } from "@/shared/stores/wordbankStore";
 
 import { ArrowUpLeftIcon } from "@/shared/assets/icons";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { SearchResultItem } from "@/features/search/types";
 import { useNavigate } from "react-router";
+import { getSearchType } from "@/pages/translate/ui/TranslatePage";
+import useDebounce from "@/shared/hooks/useDebounce";
+import { useMutation } from "@tanstack/react-query";
+import { searchApi } from "@/features/search/api/searchApi";
 
 const searchTabs = ["Dictionary", "Grammar", "Collocations"];
 
-interface SearchSectionProps {
-  selectedLanguage: string;
-  setSelectedLanguage: (language: string) => void;
-  searchResult: SearchResultItem[];
-  setSearchResult: (result: SearchResultItem[]) => void;
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-}
-
-const SearchSection = ({
-  selectedLanguage,
-  setSelectedLanguage,
-  searchResult,
-  setSearchResult,
-  activeTab,
-  setActiveTab,
-}: SearchSectionProps) => {
+const SearchSection = () => {
   const { sourceText, setSourceText } = useWordbankStore();
+  const [activeTab, setActiveTab] = useState("Dictionary");
+  const [searchResult, setSearchResult] = useState<SearchResultItem[]>([]);
+
+  const [selectedLanguage, setSelectedLanguage] = useState("Uzbek");
   const dropdownRef = useRef(null);
+  const debouncedSourceLang = useDebounce(sourceText, 500);
+
+  const searchMutation = useMutation({
+    mutationFn: searchApi.search,
+    onSuccess: (response) => {
+      if (response.status && response.result.length > 0) {
+        const bestResult =
+          response.result
+            .filter((item) => item.star > 0)
+            .sort((a, b) => b.star - a.star)[0] || response.result[0];
+        console.log("bestResult", bestResult);
+        setSearchResult(response?.result);
+      } else {
+        // setTranslation({
+        //   word: "No translation found",
+        // });
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (debouncedSourceLang.trim()) {
+      const searchType = getSearchType("Uzbek", "English");
+      searchMutation.mutate({
+        type: searchType,
+        search: debouncedSourceLang.trim(),
+      });
+    }
+  }, [debouncedSourceLang]);
+
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -83,7 +105,7 @@ const SearchSection = ({
                 className={`px-6 py-4 text-sm font-semibold rounded-md ml-4 ${
                   selectedLanguage === "English"
                     ? "bg-gray-200 text-gray-700"
-                    : "bg-gray-50 text-gray-700 hover:bg-gray-100"
+                    : " text-gray-700 hover:bg-gray-100"
                 }`}
               >
                 English
@@ -97,7 +119,7 @@ const SearchSection = ({
                 className={`px-6 py-4 text-sm font-semibold rounded-md ${
                   selectedLanguage === "Uzbek"
                     ? "bg-gray-200 text-gray-700"
-                    : "bg-gray-50 text-gray-500 hover:bg-gray-100"
+                    : " text-gray-500 hover:bg-gray-100"
                 }`}
               >
                 Uzbek

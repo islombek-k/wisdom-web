@@ -974,8 +974,9 @@ export const CancelBlackIcon = () => (
   </svg>
 );
 
-export const VolumeIcon = () => (
+export const VolumeIcon = ({ className }: { className?: string }) => (
   <svg
+    className={className}
     width="24"
     height="24"
     viewBox="0 0 24 24"
@@ -1006,8 +1007,9 @@ export const VolumeIcon = () => (
   </svg>
 );
 
-export const BookmarkIcon = () => (
+export const BookmarkIcon = ({ className }: { className?: string }) => (
   <svg
+    className={className}
     width="24"
     height="24"
     viewBox="0 0 24 24"
@@ -1647,6 +1649,64 @@ export const ArrowUpLeftIcon = () => (
       d="M15.0001 15L5 5"
       stroke="#141B34"
       stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
+export const ChevronRight = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    width="8"
+    height="15"
+    viewBox="0 0 8 15"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M1.00005 13.5L7 7.49997L0.999999 1.49997"
+      stroke="#1A1B1C"
+      stroke-width="2"
+      stroke-miterlimit="16"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
+export const ChevronDownIcon = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    width="24"
+    height="25"
+    viewBox="0 0 24 25"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6 9.50005L12 15.5L18 9.5"
+      stroke="#1A1B1C"
+      stroke-width="2"
+      stroke-miterlimit="16"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
+export const CheckCircleIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M7.5 12L10.5 15L16.5 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
+      stroke="#079455"
+      stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
     />

@@ -69,15 +69,15 @@ export const Header = () => {
               {item.name}
             </button>
           ))}
-          <button
-            onClick={handleBuyPro}
+          <a
+            href="/wisdom-pro"
             className="flex items-center justify-center gap-2 text-primary-600 font-medium"
           >
             <CrownIcon />
             <span className="text-transparent font-extrabold bg-clip-text bg-[linear-gradient(92.04deg,#026AA2_-3.79%,#512CCB_49.4%,#AF1AB7_103.79%)]">
               Wisdom Pro
             </span>
-          </button>
+          </a>
         </nav>
 
         <div className="flex items-center gap-4">
