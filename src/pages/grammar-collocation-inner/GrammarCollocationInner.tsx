@@ -9,6 +9,7 @@ import WordExplanationCard from "@/features/grammar-and-collocation/WordExplanat
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/shared/api/axios";
 import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 
 // API Types
 interface Grammar {
@@ -80,6 +81,7 @@ const alphabetLetters = [
 
 const GrammarAndCollocationInner = () => {
   const { id } = useParams<{ id: string }>();
+  const { t } = useTranslation();
 
   const {
     data: grammarDetail,
@@ -96,7 +98,7 @@ const GrammarAndCollocationInner = () => {
       <div>
         <HeroHeader />
         <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-lg text-gray-600">Loading...</div>
+          <div className="text-lg text-gray-600">{t('common.loading')}</div>
         </div>
         <Footer />
       </div>
@@ -108,7 +110,7 @@ const GrammarAndCollocationInner = () => {
       <div>
         <HeroHeader />
         <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-lg text-red-600">Error loading grammar data</div>
+          <div className="text-lg text-red-600">{t('grammar.errorLoading')}</div>
         </div>
         <Footer />
       </div>
@@ -124,14 +126,14 @@ const GrammarAndCollocationInner = () => {
             href="/"
             className="text-sm font-medium text-breadcrumb-label-secondary hover:backdrop-opacity-90"
           >
-            Home
+            {t('common.home')}
           </a>
           <ChevronRight />
           <a
             href="/grammar"
             className="text-sm font-medium text-breadcrumb-label-secondary hover:backdrop-opacity-90"
           >
-            Grammar
+            {t('common.grammar')}
           </a>
           <ChevronRight />
           <a
@@ -152,7 +154,7 @@ const GrammarAndCollocationInner = () => {
             <div className="space-y-6">
               <div className="bg-white rounded-2xl p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-6">
-                  Browse the English Grammar
+                  {t('grammar.browseGrammar')}
                 </h3>
 
                 <div className="grid grid-cols-7 gap-3 mb-6">

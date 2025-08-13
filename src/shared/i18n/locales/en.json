@@ -1,0 +1,90 @@
+{
+  "common": {
+    "home": "Home",
+    "grammar": "Grammar",
+    "search": "Search",
+    "translate": "Translate",
+    "wordbank": "Wordbank",
+    "news": "News",
+    "about": "About Us",
+    "loading": "Loading...",
+    "error": "Error",
+    "tryAgain": "Try Again",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "close": "Close",
+    "next": "Next",
+    "previous": "Previous",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "profile": "Profile",
+    "settings": "Settings",
+    "language": "Language"
+  },
+  "navigation": {
+    "home": "Home",
+    "grammar": "Grammar & Collocation",
+    "translate": "Translate",
+    "wordbank": "Wordbank",
+    "news": "News",
+    "wisdomPro": "Wisdom Pro",
+    "aboutUs": "About Us"
+  },
+  "grammar": {
+    "title": "Grammar & Collocation",
+    "browseGrammar": "Browse the English Grammar",
+    "searchPlaceholder": "Search for grammar rules...",
+    "examples": "Examples",
+    "synonyms": "Synonyms",
+    "antonyms": "Antonyms",
+    "errorLoading": "Error loading grammar data"
+  },
+  "search": {
+    "placeholder": "Search for words, phrases, or translations...",
+    "noResults": "No results found",
+    "searchResults": "Search Results",
+    "suggestions": "Suggestions"
+  },
+  "translate": {
+    "title": "Translate",
+    "from": "From",
+    "to": "To",
+    "enterText": "Enter text to translate",
+    "translation": "Translation",
+    "detectLanguage": "Detect Language"
+  },
+  "wordbank": {
+    "title": "Wordbank",
+    "myWords": "My Words",
+    "addWord": "Add Word",
+    "removeWord": "Remove Word",
+    "studyMode": "Study Mode",
+    "categories": "Categories"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "dontHaveAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "signUp": "Sign Up",
+    "signIn": "Sign In"
+  },
+  "footer": {
+    "allRightsReserved": "All rights reserved",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "contact": "Contact"
+  },
+  "pro": {
+    "title": "Unlock the Power of Words with Wisdom Pro",
+    "description": "Go beyond definitions. With Wisdom Pro, access advanced etymologies, usage examples, pronunciation audio, grammar insights, and more – all ad-free.",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More"
+  }
+}

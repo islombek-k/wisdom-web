@@ -122,7 +122,7 @@ const News = () => {
         },
       ]}
     >
-      <div className="px-25 mt-9">
+      <div className="mt-9">
         <div className="bg-white rounded-4xl p-9">
           <h1 className="text-4xl font-bold mb-6">Latest news</h1>
           <div className="flex gap-6">

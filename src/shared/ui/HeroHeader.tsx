@@ -2,20 +2,20 @@ import { CrownWhiteIcon, ProfileWhiteIcon } from "@/shared/assets/icons";
 import WhiteLogo from "@/shared/assets/images/white_logo_wisdom.png";
 import BgOrnament from "@/shared/assets/images/bg_big_ornament.png";
 import SearchSection from "@/features/home/ui/SearchSection";
-
-const navItems = [
-  { name: "Dictionary", path: "/dictionary" },
-  { name: "AI Translate", path: "/ai-translate" },
-  { name: "Grammar", path: "/grammar" },
-  { name: "Collocations", path: "/collocations" },
-  { name: "Word War", path: "/word-war" },
-  { name: "My Contacts", path: "/my-contacts" },
-  { name: "My Words", path: "/my-words" },
-  { name: "News", path: "/news" },
-  { name: "About Us", path: "/about-us" },
-];
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const HeroHeader = () => {
+  const { t } = useTranslation();
+  
+  const navItems = [
+    { name: t('navigation.home'), path: "/" },
+    { name: t('navigation.translate'), path: "/translate" },
+    { name: t('navigation.grammar'), path: "/grammar" },
+    { name: t('navigation.wordbank'), path: "/wordbank" },
+    { name: t('navigation.news'), path: "/news" },
+    { name: t('navigation.aboutUs'), path: "/about-us" },
+  ];
   return (
     <>
       <header className="relative z-10 px-6 py-4 bg-primary-900">
@@ -33,12 +33,14 @@ const HeroHeader = () => {
           </nav>
 
           <div className="flex items-center space-x-4">
+            <LanguageSwitcher />
+            
             <a
               href="/wisdom-pro"
               className="flex items-center space-x-2 text-white bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-white/30 transition-colors"
             >
               <CrownWhiteIcon />
-              <span className="text-sm font-medium">Wisdom Pro</span>
+              <span className="text-sm font-medium">{t('navigation.wisdomPro')}</span>
             </a>
 
             <a

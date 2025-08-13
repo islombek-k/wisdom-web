@@ -20,7 +20,7 @@ const NewsSection = ({
   description,
 }: NewsSectionProps) => {
   return (
-    <div className="px-25 mt-8">
+    <div className="mt-8">
       <div className="bg-white rounded-4xl relative p-9">
         <div className="flex items-center justify-between w-full">
           <div className="mb-6">
