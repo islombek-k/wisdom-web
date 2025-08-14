@@ -44,7 +44,7 @@ export const useVerifyOtp = () => {
       sessionStorage.removeItem("auth_phone");
       queryClient.invalidateQueries({ queryKey: ["user"] });
       toast.success("Login successful!");
-      navigate("/translate");
+      navigate("/");
     },
     onError: (error: any) => {
       const message =

@@ -100,8 +100,8 @@ export const OtpPage = () => {
               Enter verification code
             </h1>
             <p className="text-gray-600 text-sm leading-relaxed">
-              We have sent a verification code to{" "}
-              <span className="font-medium text-gray-900">{phoneNumber}</span>
+              We have sent a verification code to
+              <span className="font-medium text-gray-900">+{phoneNumber}</span>
             </p>
           </div>
 

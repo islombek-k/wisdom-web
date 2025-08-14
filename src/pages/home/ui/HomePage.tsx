@@ -4,7 +4,6 @@ import {
   ArrowRightIcon,
   ArrowUpLeftIcon,
   CrownWhiteIcon,
-  DesktopIcon,
   LoginIcon,
   PlayStoreBadge,
   ProfileWhiteIcon,
@@ -28,6 +27,8 @@ import { searchApi } from "@/features/search/api/searchApi";
 import useDebounce from "@/shared/hooks/useDebounce";
 import { getSearchType } from "@/pages/translate/ui/TranslatePage";
 import type { SearchResultItem } from "@/features/search/types";
+import PWAInstallButton from "@/shared/ui/pwa-install-button/PwaInstallButton";
+import SearchSection from "@/features/home/ui/SearchSection";
 
 const cardData = [
   {
@@ -74,13 +75,11 @@ const differenceInWords = [
 ];
 
 const HomePage = () => {
-  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Dictionary");
   const [selectedLanguage, setSelectedLanguage] = useState("Uzbek");
   const [searchResult, setSearchResult] = useState<SearchResultItem[]>([]);
-  const { sourceText, setSourceText } = useWordbankStore();
+  const { sourceText } = useWordbankStore();
   const debouncedSourceLang = useDebounce(sourceText, 500);
-  const dropdownRef = useRef(null);
 
   const navItems = [
     "Dictionary",
@@ -122,8 +121,6 @@ const HomePage = () => {
       });
     }
   }, [debouncedSourceLang]);
-
-  const searchTabs = ["Dictionary", "Grammar", "Collocations"];
 
   return (
     <div className="min-h-screen bg-gradient-to-br relative overflow-hidden">
@@ -178,120 +175,19 @@ const HomePage = () => {
             </div>
 
             <div>
-              <div className="flex items-center gap-2">
-                <div className="relative w-full bg-white rounded-xl">
-                  <div className="flex items-center px-5">
-                    <SearchIcon />
-                    <input
-                      type="text"
-                      value={sourceText}
-                      onChange={(e) => {
-                        setSourceText(e.target.value);
-                        if (e.target.value.trim() === "") {
-                          setSearchResult([]);
-                        }
-                      }}
-                      placeholder="Search dictionary"
-                      className="flex-1 outline-none px-4 py-4 text-lg  rounded-l-xl w-[500px]"
-                    />
-
-                    <div className="flex gap-2 py-2">
-                      <button
-                        onClick={() =>
-                          setSelectedLanguage(
-                            selectedLanguage === "English" ? "Uzbek" : "English"
-                          )
-                        }
-                        className={`px-6 py-4 text-sm font-semibold rounded-md ml-4 ${
-                          selectedLanguage === "English"
-                            ? "bg-gray-200 text-gray-700"
-                            : "bg-gray-50 text-gray-700 hover:bg-gray-100"
-                        }`}
-                      >
-                        English
-                      </button>
-                      <button
-                        onClick={() =>
-                          setSelectedLanguage(
-                            selectedLanguage === "Uzbek" ? "English" : "Uzbek"
-                          )
-                        }
-                        className={`px-6 py-4 text-sm font-semibold rounded-md ${
-                          selectedLanguage === "Uzbek"
-                            ? "bg-gray-200 text-gray-700"
-                            : "bg-gray-50 text-gray-500 hover:bg-gray-100"
-                        }`}
-                      >
-                        Uzbek
-                      </button>
-                    </div>
-                  </div>
-                  {sourceText.trim() && searchResult.length > 0 && (
-                    <div
-                      ref={dropdownRef}
-                      className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-80 overflow-y-auto"
-                    >
-                      {searchResult.map((result, index) => (
-                        <button
-                          key={result.id}
-                          // onClick={() => handleSuggestionClick(suggestion)}
-                          className={`p-5 hover:bg-gray-100 border-b border-b-gray-200 w-full py-3 cursor-pointer transition-colors flex items-center justify-between  ${
-                            index === 0 ? "rounded-t-xl" : ""
-                          } `}
-                        >
-                          {/* <Search className="w-4 h-4 text-gray-400 mr-3" /> */}
-                          <span className=" text-gray-900">
-                            {result.word_class}
-                          </span>
-                          <ArrowUpLeftIcon />
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <button
-                  onClick={() => {
-                    if (sourceText.trim()) {
-                      navigate("/translate");
-                    }
-                  }}
-                  className="p-[21px] bg-primary-600 text-white rounded-xl hover:opacity-95 transition-colors"
-                >
-                  <SearchIcon stroke="white" />
-                </button>
-              </div>
-              <div className="flex gap-2 rounded-lg p-2">
-                {searchTabs.map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`px-6 py-2 rounded-md text-sm font-medium transition-colors bg-primary-600 text-white ${
-                      activeTab === tab ? "border border-white" : ""
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                ))}
-              </div>
+              <SearchSection
+                selectedLanguage={selectedLanguage}
+                setSelectedLanguage={setSelectedLanguage}
+                searchResult={searchResult}
+                setSearchResult={setSearchResult}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+              />
             </div>
           </div>
         </div>
       </main>
       <HeroSliderSection />
-      {/* <div className="flex items-center px-25 gap-3 mt-8 w-full h-96">
-        <div>
-          <img
-            src={WordDetail}
-            alt="word detail"
-            className="max-w-2/3 w-full h-full"
-            // style={{
-            //   background:
-            //     "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 76.16%)",
-            // }}
-          />
-        </div>
-        <img src={Quote} alt="quote" className="max-w-1/3 w-full h-full" />
-      </div> */}
       <div className="px-25 mt-8">
         <div className="bg-white rounded-4xl relative">
           <div className="py-[59px] pl-[64px]">
@@ -309,10 +205,7 @@ const HomePage = () => {
                   <AppStoreBadge />
                   <PlayStoreBadge />
                 </div>
-                <button className="flex gap-2 text-sm font-semibold text-white hover:cursor-pointer items-center bg-primary-600 py-2.5 px-4 rounded-lg mt-4">
-                  <DesktopIcon />
-                  Download Desktop app
-                </button>
+                <PWAInstallButton />
               </div>
             </div>
             <img src={WisdomContainer} className="absolute right-0 bottom-0" />
