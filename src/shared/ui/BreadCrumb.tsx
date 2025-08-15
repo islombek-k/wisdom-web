@@ -26,7 +26,6 @@ const BreadCrumb: React.FC<BreadcrumbProps> = ({
   itemClassName = "text-sm font-medium text-breadcrumb-label-secondary hover:backdrop-opacity-90 transition-opacity",
   activeItemClassName = "text-sm text-breadcrumb-label cursor-default",
   separatorClassName = "",
-  maxWidth = "w-[1240px]",
   showBackground = true,
 }) => {
   const handleItemClick = (item: BreadcrumbItem, event: React.MouseEvent) => {

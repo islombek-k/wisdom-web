@@ -1,9 +1,6 @@
 import { ChevronRight } from "@/shared/assets/icons";
 import { Footer } from "@/shared/ui/Footer";
 import HeroHeader from "@/shared/ui/HeroHeader";
-import KeyFeature1 from "@/shared/assets/images/key-feature-1.png";
-import KeyFeature2 from "@/shared/assets/images/key-feature-2.png";
-import KeyFeature3 from "@/shared/assets/images/key-feature-3.png";
 import AdBg from "@/shared/assets/images/ad-bg.png";
 import WordExplanationCard from "@/features/grammar/WordExplanationCard";
 import { useQuery } from "@tanstack/react-query";
@@ -29,26 +26,6 @@ const fetchGrammarDetail = async (
   const response = await apiClient.get(`/api/catalogue/grammar/view/${id}`);
   return response.data;
 };
-
-const keyFeatures = [
-  {
-    id: 1,
-    icon: KeyFeature1,
-    description:
-      "Useful information on spelling, punctuation and word formation",
-  },
-  {
-    id: 2,
-    icon: KeyFeature2,
-    description: "Important advice on how to use English in conversation",
-  },
-  {
-    id: 3,
-    icon: KeyFeature3,
-    description:
-      "Useful information on spelling, punctuation and word formation",
-  },
-];
 
 const alphabetLetters = [
   "a",
@@ -98,7 +75,7 @@ const GrammarAndCollocationInner = () => {
       <div>
         <HeroHeader />
         <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-lg text-gray-600">{t('common.loading')}</div>
+          <div className="text-lg text-gray-600">{t("common.loading")}</div>
         </div>
         <Footer />
       </div>
@@ -110,7 +87,9 @@ const GrammarAndCollocationInner = () => {
       <div>
         <HeroHeader />
         <div className="flex justify-center items-center min-h-[400px]">
-          <div className="text-lg text-red-600">{t('grammar.errorLoading')}</div>
+          <div className="text-lg text-red-600">
+            {t("grammar.errorLoading")}
+          </div>
         </div>
         <Footer />
       </div>
@@ -126,14 +105,14 @@ const GrammarAndCollocationInner = () => {
             href="/"
             className="text-sm font-medium text-breadcrumb-label-secondary hover:backdrop-opacity-90"
           >
-            {t('common.home')}
+            {t("common.home")}
           </a>
           <ChevronRight />
           <a
             href="/grammar"
             className="text-sm font-medium text-breadcrumb-label-secondary hover:backdrop-opacity-90"
           >
-            {t('common.grammar')}
+            {t("common.grammar")}
           </a>
           <ChevronRight />
           <a
@@ -154,7 +133,7 @@ const GrammarAndCollocationInner = () => {
             <div className="space-y-6">
               <div className="bg-white rounded-2xl p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-6">
-                  {t('grammar.browseGrammar')}
+                  {t("grammar.browseGrammar")}
                 </h3>
 
                 <div className="grid grid-cols-7 gap-3 mb-6">

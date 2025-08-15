@@ -1,6 +1,3 @@
-import { ChevronRight } from "@/shared/assets/icons";
-import { Footer } from "@/shared/ui/Footer";
-import HeroHeader from "@/shared/ui/HeroHeader";
 import WordOne from "@/shared/assets/images/word_one.png";
 import WordTwo from "@/shared/assets/images/word_two.png";
 import WordThree from "@/shared/assets/images/word_three.png";

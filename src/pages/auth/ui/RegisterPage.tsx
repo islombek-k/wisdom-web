@@ -25,13 +25,7 @@ export const RegisterPage = () => {
     replacement: { _: /\d/ },
   });
 
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-    reset,
-    watch,
-  } = useForm<AuthFormData>({
+  const { handleSubmit, control, reset, watch } = useForm<AuthFormData>({
     mode: "onChange",
     defaultValues: {
       phone: "",
