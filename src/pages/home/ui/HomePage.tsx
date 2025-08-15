@@ -1,16 +1,10 @@
-import { useEffect, useRef, useState } from "react";
 import {
   AppStoreBadge,
   ArrowRightIcon,
-  ArrowUpLeftIcon,
-  CrownWhiteIcon,
   LoginIcon,
   PlayStoreBadge,
-  ProfileWhiteIcon,
-  SearchIcon,
 } from "@/shared/assets/icons";
-import WhiteLogo from "@/shared/assets/images/white_logo_wisdom.png";
-import BgOrnament from "@/shared/assets/images/bg_big_ornament.png";
+
 import QR from "@/shared/assets/images/QR.png";
 import WisdomContainer from "@/shared/assets/images/bg_wisdom_container.png";
 import FlipCard from "@/shared/assets/images/flip_card.png";
@@ -19,16 +13,10 @@ import OrnamentBg from "@/shared/assets/images/BG_ornament.png";
 import WordOne from "@/shared/assets/images/word_one.png";
 import WordTwo from "@/shared/assets/images/word_two.png";
 import WordThree from "@/shared/assets/images/word_three.png";
-import { useWordbankStore } from "@/shared/stores/wordbankStore";
-import { useNavigate } from "react-router";
 import HeroSliderSection from "@/features/home/ui/HeroSliderSection";
-import { useMutation } from "@tanstack/react-query";
-import { searchApi } from "@/features/search/api/searchApi";
-import useDebounce from "@/shared/hooks/useDebounce";
-import { getSearchType } from "@/pages/translate/ui/TranslatePage";
-import type { SearchResultItem } from "@/features/search/types";
 import PWAInstallButton from "@/shared/ui/pwa-install-button/PwaInstallButton";
-import SearchSection from "@/features/home/ui/SearchSection";
+import HeroHeader from "@/shared/ui/HeroHeader";
+import NewsSection from "@/shared/ui/news-section/NewsSection";
 
 const cardData = [
   {
@@ -60,133 +48,27 @@ const differenceInWords = [
     image: WordOne,
     title: "For linguists, it was the decade of the pronoun",
     id: 1,
+    path: "/news/1",
   },
   {
     image: WordTwo,
     title: "Norwegians using ‘Texas’ to mean ‘crazy’ actually isn’t so crazy",
     id: 2,
+    path: "/news/1",
   },
   {
     image: WordThree,
     title:
       "Giving back to English: how Nigerian words made it into the Oxford English Dictionary",
     id: 3,
+    path: "/news/1",
   },
 ];
 
 const HomePage = () => {
-  const [activeTab, setActiveTab] = useState("Dictionary");
-  const [selectedLanguage, setSelectedLanguage] = useState("Uzbek");
-  const [searchResult, setSearchResult] = useState<SearchResultItem[]>([]);
-  const { sourceText } = useWordbankStore();
-  const debouncedSourceLang = useDebounce(sourceText, 500);
-
-  const navItems = [
-    "Dictionary",
-    "AI Translate",
-    "Grammar",
-    "Collocations",
-    "Word War",
-    "My Contacts",
-    "My Words",
-    "News",
-    "About Us",
-  ];
-
-  const searchMutation = useMutation({
-    mutationFn: searchApi.search,
-    onSuccess: (response) => {
-      if (response.status && response.result.length > 0) {
-        const bestResult =
-          response.result
-            .filter((item) => item.star > 0)
-            .sort((a, b) => b.star - a.star)[0] || response.result[0];
-        console.log("bestResult", bestResult);
-        setSearchResult(response?.result);
-        // setTranslation(bestResult);
-      } else {
-        // setTranslation({
-        //   word: "No translation found",
-        // });
-      }
-    },
-  });
-
-  useEffect(() => {
-    if (debouncedSourceLang.trim()) {
-      const searchType = getSearchType("Uzbek", "English");
-      searchMutation.mutate({
-        type: searchType,
-        search: debouncedSourceLang.trim(),
-      });
-    }
-  }, [debouncedSourceLang]);
-
   return (
     <div className="min-h-screen bg-gradient-to-br relative overflow-hidden">
-      <header className="relative z-10 px-6 py-4 bg-primary-900">
-        <div className="mx-auto px-25 flex items-center justify-between">
-          <nav className="flex items-center space-x-5">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-white font-medium hover:text-white/80 transition-colors"
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center space-x-4">
-            <button className="flex items-center space-x-2 text-white bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-white/30 transition-colors">
-              <CrownWhiteIcon />
-              <span className="text-sm font-medium">Wisdom Pro</span>
-            </button>
-
-            <a
-              href="/register"
-              className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-white/30 transition-colors"
-            >
-              <ProfileWhiteIcon />
-            </a>
-          </div>
-        </div>
-      </header>
-
-      <main
-        style={{
-          backgroundImage: `url(${BgOrnament})`,
-          width: "100%",
-          height: "100%",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div className="flex gap-25 items-center py-20">
-          <div className="flex justify-between items-center gap-25 px-25">
-            <div className="mb-12">
-              <img
-                src={WhiteLogo}
-                alt="Wisdom Dictionary"
-                className="mx-auto h-20"
-              />
-            </div>
-
-            <div>
-              <SearchSection
-                selectedLanguage={selectedLanguage}
-                setSelectedLanguage={setSelectedLanguage}
-                searchResult={searchResult}
-                setSearchResult={setSearchResult}
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-              />
-            </div>
-          </div>
-        </div>
-      </main>
+      <HeroHeader />
       <HeroSliderSection />
       <div className="px-25 mt-8">
         <div className="bg-white rounded-4xl relative">
@@ -278,45 +160,7 @@ const HomePage = () => {
           <img src={FlipCard} className="absolute right-18 bottom-0" />
         </div>
       </div>
-      <div className="px-25 mt-8">
-        <div className="bg-white rounded-4xl relative p-9">
-          <div className="flex items-center justify-between w-full">
-            <h2 className="font-semibold text-2xl mb-4">Difference in words</h2>
-            <a
-              href="/"
-              className="flex items-center gap-2 text-primary-700 text-sm font-semibold"
-            >
-              Explore more <ArrowRightIcon stroke="#026aa2" />
-            </a>
-          </div>
-          <div className="flex gap-3 overflow-hidden w-full">
-            {differenceInWords.map((word) => (
-              <div
-                key={word.id}
-                className="relative w-full rounded-2xl overflow-hidden shadow-lg"
-              >
-                <img
-                  src={word.image}
-                  alt="Art"
-                  className="w-full h-auto object-cover"
-                />
-
-                <div className="absolute bottom-0 left-0 right-0 backdrop-blur-2xl bg-white/20 p-6">
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    {word.title}
-                  </h3>
-                  <a
-                    href="#"
-                    className="flex items-center gap-2 mt-2 text-primary-700 font-medium hover:underline"
-                  >
-                    Read more <ArrowRightIcon stroke="#026aa2" />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <NewsSection data={differenceInWords} title="Difference in words" />
       <Footer />
     </div>
   );

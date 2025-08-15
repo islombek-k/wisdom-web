@@ -12,6 +12,8 @@
   --color-primary-900: #0b4a6f;
   --color-gray-100: #f2f4f7;
   --color-gray-200: #eaecf0;
+  --color-breadcrumb-label-secondary: #4b5563;
+  --color-breadcrumb-label: #1f2937;
 }
 
 body {

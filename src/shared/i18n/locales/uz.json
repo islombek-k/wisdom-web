@@ -1,0 +1,101 @@
+{
+  "common": {
+    "home": "Bosh sahifa",
+    "grammar": "Grammatika",
+    "collocation": "Kollokatsiya",
+    "search": "Qidirish",
+    "translate": "Tarjima",
+    "wordbank": "So'zlar banki",
+    "news": "Yangiliklar",
+    "about": "Biz haqimizda",
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik",
+    "tryAgain": "Qayta urinish",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "submit": "Yuborish",
+    "close": "Yopish",
+    "next": "Keyingi",
+    "previous": "Oldingi",
+    "login": "Kirish",
+    "register": "Ro'yxatdan o'tish",
+    "logout": "Chiqish",
+    "profile": "Profil",
+    "settings": "Sozlamalar",
+    "language": "Til",
+    "keyFeatures": "Asosiy xususiyatlar"
+  },
+  "navigation": {
+    "home": "Bosh sahifa",
+    "grammar": "Grammatika va birikmalar",
+    "translate": "Tarjima",
+    "collocation": "Kollokatsiya",
+    "wordbank": "So'zlar banki",
+    "news": "Yangiliklar",
+    "wisdomPro": "Wisdom Pro",
+    "aboutUs": "Biz haqimizda"
+  },
+  "grammar": {
+    "title": "Grammatika va birikmalar",
+    "browseGrammar": "Ingliz tili grammatikasini o'rganish",
+    "searchPlaceholder": "Grammatika qoidalarini qidirish...",
+    "examples": "Misollar",
+    "synonyms": "Sinonimlar",
+    "antonyms": "Antonimlar",
+    "errorLoading": "Grammatika ma'lumotlarini yuklashda xatolik"
+  },
+  "collocation": {
+    "exploreCollocations": "Ingliz tili kollokatsiyalarini o'rganing",
+    "description": "Tabiiy so'z birikmalarini kashf eting va keng qamrovli kollokatsiya misollari bilan ingliz tilidagi ravonligingizni yaxshilang.",
+    "browseCollocations": "Ingliz tili kollokatsiyalarini ko'ring",
+    "errorLoading": "Kollokatsiya ma'lumotlarini yuklashda xatolik",
+    "collocationDetails": "Kollokatsiya tafsilotlari",
+    "detailDescription": "So'zlar ingliz tilida qanday tabiiy birlashishini o'rganing."
+  },
+  "search": {
+    "placeholder": "So'zlar, iboralar yoki tarjimalarni qidirish...",
+    "noResults": "Natijalar topilmadi",
+    "searchResults": "Qidiruv natijalari",
+    "suggestions": "Takliflar"
+  },
+  "translate": {
+    "title": "Tarjima",
+    "from": "Dan",
+    "to": "Ga",
+    "enterText": "Tarjima qilish uchun matn kiriting",
+    "translation": "Tarjima",
+    "detectLanguage": "Tilni aniqlash"
+  },
+  "wordbank": {
+    "title": "So'zlar banki",
+    "myWords": "Mening so'zlarim",
+    "addWord": "So'z qo'shish",
+    "removeWord": "So'zni o'chirish",
+    "studyMode": "O'rganish rejimi",
+    "categories": "Kategoriyalar"
+  },
+  "auth": {
+    "login": "Kirish",
+    "register": "Ro'yxatdan o'tish",
+    "email": "Elektron pochta",
+    "password": "Parol",
+    "confirmPassword": "Parolni tasdiqlash",
+    "forgotPassword": "Parolni unutdingizmi?",
+    "dontHaveAccount": "Hisobingiz yo'qmi?",
+    "alreadyHaveAccount": "Hisobingiz bormi?",
+    "signUp": "Ro'yxatdan o'tish",
+    "signIn": "Kirish"
+  },
+  "footer": {
+    "allRightsReserved": "Barcha huquqlar himoyalangan",
+    "privacyPolicy": "Maxfiylik siyosati",
+    "termsOfService": "Foydalanish shartlari",
+    "contact": "Aloqa"
+  },
+  "pro": {
+    "title": "Wisdom Pro bilan so'zlar kuchini oching",
+    "description": "Ta'riflardan tashqariga chiqing. Wisdom Pro bilan kengaytirilgan etimologiya, foydalanish misollari, talaffuz audio, grammatika tushunchalari va boshqa ko'p narsalarga kirish imkoniyatiga ega bo'ling – reklamasiz.",
+    "getStarted": "Boshlash",
+    "learnMore": "Ko'proq bilish"
+  }
+}

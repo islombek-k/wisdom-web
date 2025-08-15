@@ -1,0 +1,101 @@
+{
+  "common": {
+    "home": "Главная",
+    "grammar": "Грамматика",
+    "collocation": "Коллокации",
+    "search": "Поиск",
+    "translate": "Перевод",
+    "wordbank": "Словарь",
+    "news": "Новости",
+    "about": "О нас",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "tryAgain": "Попробовать снова",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "submit": "Отправить",
+    "close": "Закрыть",
+    "next": "Далее",
+    "previous": "Назад",
+    "login": "Войти",
+    "register": "Регистрация",
+    "logout": "Выйти",
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "language": "Язык",
+    "keyFeatures": "Ключевые особенности"
+  },
+  "navigation": {
+    "home": "Главная",
+    "grammar": "Грамматика и словосочетания",
+    "translate": "Перевод",
+    "collocation": "Коллокации",
+    "wordbank": "Словарь",
+    "news": "Новости",
+    "wisdomPro": "Wisdom Pro",
+    "aboutUs": "О нас"
+  },
+  "grammar": {
+    "title": "Грамматика и словосочетания",
+    "browseGrammar": "Изучить английскую грамматику",
+    "searchPlaceholder": "Поиск грамматических правил...",
+    "examples": "Примеры",
+    "synonyms": "Синонимы",
+    "antonyms": "Антонимы",
+    "errorLoading": "Ошибка загрузки грамматических данных"
+  },
+  "collocation": {
+    "exploreCollocations": "Изучить английские коллокации",
+    "description": "Откройте для себя естественные словосочетания и улучшите свою беглость английского языка с помощью комплексных примеров коллокаций.",
+    "browseCollocations": "Просмотреть английские коллокации",
+    "errorLoading": "Ошибка загрузки данных коллокаций",
+    "collocationDetails": "Детали коллокации",
+    "detailDescription": "Узнайте, как слова естественно сочетаются в английском языке."
+  },
+  "search": {
+    "placeholder": "Поиск слов, фраз или переводов...",
+    "noResults": "Результаты не найдены",
+    "searchResults": "Результаты поиска",
+    "suggestions": "Предложения"
+  },
+  "translate": {
+    "title": "Перевод",
+    "from": "С",
+    "to": "На",
+    "enterText": "Введите текст для перевода",
+    "translation": "Перевод",
+    "detectLanguage": "Определить язык"
+  },
+  "wordbank": {
+    "title": "Словарь",
+    "myWords": "Мои слова",
+    "addWord": "Добавить слово",
+    "removeWord": "Удалить слово",
+    "studyMode": "Режим изучения",
+    "categories": "Категории"
+  },
+  "auth": {
+    "login": "Войти",
+    "register": "Регистрация",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "forgotPassword": "Забыли пароль?",
+    "dontHaveAccount": "Нет аккаунта?",
+    "alreadyHaveAccount": "Уже есть аккаунт?",
+    "signUp": "Зарегистрироваться",
+    "signIn": "Войти"
+  },
+  "footer": {
+    "allRightsReserved": "Все права защищены",
+    "privacyPolicy": "Политика конфиденциальности",
+    "termsOfService": "Условия использования",
+    "contact": "Контакты"
+  },
+  "pro": {
+    "title": "Откройте силу слов с Wisdom Pro",
+    "description": "Выйдите за рамки определений. С Wisdom Pro получите доступ к расширенной этимологии, примерам использования, аудио произношению, грамматическим сведениям и многому другому – без рекламы.",
+    "getStarted": "Начать",
+    "learnMore": "Узнать больше"
+  }
+}

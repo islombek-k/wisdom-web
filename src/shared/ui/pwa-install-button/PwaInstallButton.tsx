@@ -96,10 +96,10 @@ const PWAInstallButton = () => {
     );
   }
 
-  if (!isInstallable) {
-    return null;
-  }
-
+  // if (!isInstallable) {
+  //   return null;
+  // }
+  // TODO: technically shouldn't show
   return (
     <button
       onClick={handleInstallClick}
