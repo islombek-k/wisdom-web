@@ -21,7 +21,7 @@ const PWAInstallButton = () => {
     useState<BeforeInstallPromptEvent | null>(null);
   const [isInstallable, setIsInstallable] = useState<boolean>(false);
   const [isInstalled, setIsInstalled] = useState<boolean>(false);
-
+  console.log(isInstallable);
   useEffect(() => {
     const checkIfInstalled = () => {
       if (window.matchMedia("(display-mode: standalone)").matches) {

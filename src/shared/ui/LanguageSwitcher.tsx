@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { languages } from '../i18n';
-import { ChevronDownIcon } from '../assets/icons';
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { languages } from "../i18n";
+import { ChevronDownIcon } from "../assets/icons";
 
 const LanguageSwitcher: React.FC = () => {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
-  const currentLanguage = languages[i18n.language as keyof typeof languages] || languages.en;
+  const currentLanguage =
+    languages[i18n.language as keyof typeof languages] || languages.en;
 
   const handleLanguageChange = (langCode: string) => {
     i18n.changeLanguage(langCode);
@@ -22,17 +23,21 @@ const LanguageSwitcher: React.FC = () => {
       >
         <span className="text-lg">{currentLanguage.flag}</span>
         <span>{currentLanguage.name}</span>
-        <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDownIcon
+          className={`w-4 h-4 transition-transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
       </button>
 
       {isOpen && (
         <>
           {/* Backdrop */}
-          <div 
-            className="fixed inset-0 z-10" 
+          <div
+            className="fixed inset-0 z-10"
             onClick={() => setIsOpen(false)}
           />
-          
+
           {/* Dropdown */}
           <div className="absolute right-0 z-20 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg">
             <div className="py-1">
@@ -41,7 +46,9 @@ const LanguageSwitcher: React.FC = () => {
                   key={code}
                   onClick={() => handleLanguageChange(code)}
                   className={`w-full flex items-center gap-3 px-4 py-2 text-sm text-left hover:bg-gray-100 ${
-                    i18n.language === code ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
+                    i18n.language === code
+                      ? "bg-blue-50 text-blue-700"
+                      : "text-gray-700"
                   }`}
                 >
                   <span className="text-lg">{lang.flag}</span>

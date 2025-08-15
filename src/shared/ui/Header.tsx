@@ -16,9 +16,6 @@ export const Header = () => {
   const [activeTab, setActiveTab] = useState("Translate");
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleBuyPro = () => {
-    setIsModalOpen(true);
-  };
 
   const navItems = [
     { name: "Dictionary", href: "#" },
